@@ -72,11 +72,22 @@ app.get('/api/health', (_req, res) => {
   res.json({
     status: 'ok',
     service: 'SAHAY API',
-    version: '1.0.0',
+    version: '1.0.1',
     environment: config.nodeEnv,
     timestamp: new Date().toISOString(),
     notice: 'Smart India Hackathon Prototype — Demo data only',
   });
+});
+
+app.get('/api/health/db', async (_req, res) => {
+  try {
+    const { prisma } = await import('./config/database.js');
+    const userCount = await prisma.user.count();
+    const caseCount = await prisma.case.count();
+    res.json({ status: 'ok', userCount, caseCount });
+  } catch (err: any) {
+    res.status(500).json({ status: 'error', message: err?.message, stack: err?.stack });
+  }
 });
 
 // ---- API Routes ----
