@@ -52,6 +52,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(
   rateLimit({
     windowMs: config.rateLimit.windowMs,
     max: config.rateLimit.max,
