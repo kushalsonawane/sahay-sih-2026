@@ -47,7 +47,7 @@ export type UserRole =
   | 'district_officer'
   | 'state_admin'
   | 'national_officer';
-export type Language = 'en' | 'hi';
+export type Language = 'en' | 'hi' | 'mr';
 export type DataConfidence = 'high' | 'medium' | 'limited';
 
 // ---- User ----

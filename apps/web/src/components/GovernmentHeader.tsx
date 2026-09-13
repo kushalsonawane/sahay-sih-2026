@@ -110,10 +110,10 @@ export const GovernmentHeader: React.FC = () => {
             <button
               onClick={toggleLanguage}
               className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 transition"
-              title="Change Language / भाषा बदलें"
+              title="Change Language / भाषा बदला"
             >
               <Globe className="w-3 h-3 text-teal-400" />
-              <span>{language === 'en' ? 'हिन्दी' : 'English'}</span>
+              <span>{language === 'en' ? 'English' : language === 'hi' ? 'हिन्दी' : 'मराठी'}</span>
             </button>
 
             {/* SIH 2026 Tag */}

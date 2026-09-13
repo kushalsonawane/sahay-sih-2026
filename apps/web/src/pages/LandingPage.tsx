@@ -28,7 +28,7 @@ import {
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const setDemoRole = useAuthStore((s) => s.setDemoRole);
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   const handleRoleSelect = (role: any, path: string) => {
     setDemoRole(role);
@@ -111,13 +111,15 @@ export const LandingPage: React.FC = () => {
       <div className="bg-white border-2 border-stone-300 rounded-lg p-2.5 shadow-2xs flex flex-col sm:flex-row sm:items-center gap-3">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#B91C1C] text-white font-bold text-[11px] uppercase tracking-wider shrink-0">
           <Bell className="w-3.5 h-3.5 animate-pulse" />
-          <span>{isHindi ? 'नवीनतम अधिसूचना' : 'Official Notification'}</span>
+          <span>{isMarathi ? 'अधिकृत सूचना' : isHindi ? 'नवीनतम अधिसूचना' : 'Official Notification'}</span>
         </div>
 
         <div className="text-xs text-stone-800 font-medium overflow-hidden">
           <span className="text-[#B91C1C] font-bold mr-1.5">[MANDATORY COMPLIANCE]:</span>
           <span>
-            {isHindi
+            {isMarathi
+              ? 'अनुसूचित जाती व जमाती (अत्याचार प्रतिबंध) नियम १२(४) अंतर्गत ७ कामकाजाच्या दिवसांत २५% कायदेशीर आर्थिक मदत देणे अनिवार्य आहे.'
+              : isHindi
               ? 'अनुसूचित जाति एवं अनुसूचित जनजाति (अत्याचार निवारण) नियम 12(4) के अंतर्गत पीड़ितों को 7 कार्यदिवसों में 25% प्रथम किश्त का प्रत्यक्ष लाभ अंतरण (DBT) अनिवार्य है।'
               : 'Rule 12(4) SC/ST PoA Rules mandates release of initial 25% statutory economic relief within 7 working days of FIR registration across all districts.'}
           </span>
@@ -139,7 +141,9 @@ export const LandingPage: React.FC = () => {
             </div>
 
             <h1 className="text-2xl sm:text-3xl font-black font-serif text-[#0B3B60] tracking-tight leading-tight">
-              {isHindi
+              {isMarathi
+                ? 'सहाय (SAHAY) — राष्ट्रीय अत्याचार संकट देखरेख आणि कायदेशीर मदत प्रणाली'
+                : isHindi
                 ? 'सहाय (SAHAY) — राष्ट्रीय अत्याचार निवारण निगरानी, संकट पूर्वानुमान एवं वैधानिक राहत प्रणाली'
                 : 'SAHAY — National Portal for Atrocity Distress Monitoring, Rule 12 Relief & Section 15A Witness Protection'}
             </h1>
@@ -180,7 +184,7 @@ export const LandingPage: React.FC = () => {
           <div className="flex items-center gap-2.5">
             <div className="w-1.5 h-6 bg-[#F58220] rounded-xs" />
             <h2 className="text-base sm:text-lg font-black font-serif text-[#0B3B60] uppercase tracking-tight">
-              {isHindi ? 'हितधारक एवं उपयोगकर्ता पोर्टल (#users)' : 'Stakeholder & User Portals (#users)'}
+              {isMarathi ? 'हितधारक आणि वापरकर्ता पोर्टल (#users)' : isHindi ? 'हितधारक एवं उपयोगकर्ता पोर्टल (#users)' : 'Stakeholder & User Portals (#users)'}
             </h2>
           </div>
           <span className="text-xs text-stone-500 hidden sm:inline">
@@ -201,7 +205,7 @@ export const LandingPage: React.FC = () => {
               </div>
 
               <h3 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi ? 'नागरिक एवं पीड़ित सुरक्षित पोर्टल' : 'Citizen & Beneficiary Safe Space'}
+                {isMarathi ? 'नागरिक व लाभार्थी सुरक्षित जागा' : isHindi ? 'नागरिक एवं पीड़ित सुरक्षित पोर्टल' : 'Citizen & Beneficiary Safe Space'}
               </h3>
 
               <p className="text-xs text-stone-600 leading-relaxed">
@@ -226,7 +230,7 @@ export const LandingPage: React.FC = () => {
               onClick={() => handleRoleSelect('victim', '/victim')}
               className="w-full py-3 px-4 rounded-xl bg-[#0D6938] hover:bg-[#094d29] text-white font-bold text-sm shadow-xs transition flex items-center justify-center gap-2 cursor-pointer border border-emerald-700"
             >
-              <span>{isHindi ? 'नागरिक सुरक्षित पोर्टल में प्रवेश करें →' : 'Enter Citizen Safe Portal →'}</span>
+              <span>{isMarathi ? 'नागरिक सुरक्षित पोर्टल प्रविष्ट करा →' : isHindi ? 'नागरिक सुरक्षित पोर्टल में प्रवेश करें →' : 'Enter Citizen Safe Portal →'}</span>
             </button>
           </div>
 
@@ -242,7 +246,7 @@ export const LandingPage: React.FC = () => {
               </div>
 
               <h3 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi ? 'जिला दंडाधिकारी एवं अधिकारी कंसोल' : 'District Magistrate & Officer Console'}
+                {isMarathi ? 'जिल्हा दंडाधिकारी आणि अधिकारी कन्सोल' : isHindi ? 'जिला दंडाधिकारी एवं अधिकारी कंसोल' : 'District Magistrate & Officer Console'}
               </h3>
 
               <p className="text-xs text-stone-600 leading-relaxed">
@@ -267,7 +271,7 @@ export const LandingPage: React.FC = () => {
               onClick={() => handleRoleSelect('district_officer', '/dashboard')}
               className="w-full py-3 px-4 rounded-xl bg-[#0B3B60] hover:bg-[#072842] text-white font-bold text-sm shadow-xs transition flex items-center justify-center gap-2 cursor-pointer border border-[#082b47]"
             >
-              <span>{isHindi ? 'प्रशासनिक कंसोल में प्रवेश करें →' : 'Enter District Officer Console →'}</span>
+              <span>{isMarathi ? 'प्रशासकीय कन्सोल प्रविष्ट करा →' : isHindi ? 'प्रशासनिक कंसोल में प्रवेश करें →' : 'Enter District Officer Console →'}</span>
             </button>
           </div>
 
@@ -283,7 +287,7 @@ export const LandingPage: React.FC = () => {
               </div>
 
               <h3 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi ? 'क्लिनिकल मनोवैज्ञानिक कंसोल' : 'Clinical Psychologist Console'}
+                {isMarathi ? 'क्लिनिकल सायकोलॉजिस्ट कन्सोल' : isHindi ? 'क्लिनिकल मनोवैज्ञानिक कंसोल' : 'Clinical Psychologist Console'}
               </h3>
 
               <p className="text-xs text-stone-600 leading-relaxed">
@@ -308,7 +312,7 @@ export const LandingPage: React.FC = () => {
               onClick={() => handleRoleSelect('counsellor', '/cases')}
               className="w-full py-3 px-4 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-sm shadow-xs transition flex items-center justify-center gap-2 cursor-pointer border border-purple-800"
             >
-              <span>{isHindi ? 'क्लिनिकल कंसोल में प्रवेश करें →' : 'Enter Counsellor Console →'}</span>
+              <span>{isMarathi ? 'सल्लागार कन्सोल प्रविष्ट करा →' : isHindi ? 'क्लिनिकल कंसोल में प्रवेश करें →' : 'Enter Counsellor Console →'}</span>
             </button>
           </div>
 
@@ -324,7 +328,7 @@ export const LandingPage: React.FC = () => {
               </div>
 
               <h3 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi ? 'मंत्रालय एवं राज्य निदेशालय डैशबोर्ड' : 'Ministry Directorate & State Analytics'}
+                {isMarathi ? 'संचालनालय व राज्य विश्लेषण' : isHindi ? 'मंत्रालय एवं राज्य निदेशालय डैशबोर्ड' : 'Ministry Directorate & State Analytics'}
               </h3>
 
               <p className="text-xs text-stone-600 leading-relaxed">
@@ -349,7 +353,7 @@ export const LandingPage: React.FC = () => {
               onClick={() => handleRoleSelect('state_admin', '/analytics')}
               className="w-full py-3 px-4 rounded-xl bg-amber-700 hover:bg-amber-800 text-white font-bold text-sm shadow-xs transition flex items-center justify-center gap-2 cursor-pointer border border-amber-800"
             >
-              <span>{isHindi ? 'मंत्रालय डैशबोर्ड में प्रवेश करें →' : 'Enter Directorate Analytics →'}</span>
+              <span>{isMarathi ? 'संचालनालय विश्लेषण प्रविष्ट करा →' : isHindi ? 'मंत्रालय डैशबोर्ड में प्रवेश करें →' : 'Enter Directorate Analytics →'}</span>
             </button>
           </div>
         </div>
@@ -363,7 +367,7 @@ export const LandingPage: React.FC = () => {
           <div className="flex items-center gap-2.5">
             <FileText className="w-5 h-5 text-[#0B3B60]" />
             <h3 className="text-base font-bold font-serif text-stone-900">
-              {isHindi ? 'नवीनतम परिपत्र, अधिसूचनाएं एवं आदेश' : 'Latest Circulars, Notifications & Government Orders'}
+              {isMarathi ? 'नवीनतम परिपत्रके, अधिसूचना व सरकारी आदेश' : isHindi ? 'नवीनतम परिपत्र, अधिसूचनाएं एवं आदेश' : 'Latest Circulars, Notifications & Government Orders'}
             </h3>
           </div>
           <span className="text-[11px] font-semibold text-[#0B3B60] cursor-pointer hover:underline">
@@ -425,7 +429,9 @@ export const LandingPage: React.FC = () => {
             <Scale className="w-5 h-5 text-[#0B3B60]" />
             <div>
               <h3 className="text-base font-bold font-serif text-stone-900">
-                {isHindi
+                {isMarathi
+                  ? 'कायदेशीर आर्थिक मदत — नियम १२(४) परिशिष्ट-१'
+                  : isHindi
                   ? 'वैधानिक आर्थिक राहत अनुसूची — नियम 12(4) अनुलग्नक-I'
                   : 'Statutory Economic Relief Scales — Rule 12(4) Annexure-I'}
               </h3>

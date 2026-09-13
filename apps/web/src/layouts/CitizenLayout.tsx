@@ -17,7 +17,7 @@ import { useAccessibilityStore } from '../store/authStore';
 import { AshokaEmblem } from '../components/NationalEmblem';
 
 export const CitizenLayout: React.FC = () => {
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
   const { largeText } = useAccessibilityStore();
   const handleQuickExit = () => {
     window.location.replace('https://www.google.com');
@@ -26,32 +26,32 @@ export const CitizenLayout: React.FC = () => {
   const navItems = [
     {
       to: '/victim',
-      label: isHindi ? 'होम' : 'Home',
+      label: isMarathi ? 'होम' : isHindi ? 'होम' : 'Home',
       icon: <Heart className="w-5 h-5" />,
     },
     {
       to: '/victim/check-in',
-      label: isHindi ? 'चेक-इन' : 'Check-In',
+      label: isMarathi ? 'चेक-इन' : isHindi ? 'चेक-इन' : 'Check-In',
       icon: <HeartHandshake className="w-5 h-5" />,
     },
     {
       to: '/victim/chat',
-      label: isHindi ? 'मित्र से बात' : 'Sahay Mitra',
+      label: isMarathi ? 'मित्राशी बोला' : isHindi ? 'मित्र से बात' : 'Sahay Mitra',
       icon: <MessageCircleHeart className="w-5 h-5" />,
     },
     {
       to: '/victim/support',
-      label: isHindi ? 'सहायता' : 'Support',
+      label: isMarathi ? 'मदत' : isHindi ? 'सहायता' : 'Support',
       icon: <PhoneCall className="w-5 h-5" />,
     },
     {
       to: '/victim/appointments',
-      label: isHindi ? 'सत्र' : 'Sessions',
+      label: isMarathi ? 'सत्रे' : isHindi ? 'सत्र' : 'Sessions',
       icon: <CalendarCheck className="w-5 h-5" />,
     },
     {
       to: '/victim/privacy',
-      label: isHindi ? 'गोपनीयता' : 'Privacy',
+      label: isMarathi ? 'गोपनीयता' : isHindi ? 'गोपनीयता' : 'Privacy',
       icon: <Lock className="w-5 h-5" />,
     },
   ];
@@ -96,13 +96,13 @@ export const CitizenLayout: React.FC = () => {
             </div>
             <div>
               <div className="font-bold text-base font-serif text-stone-900 tracking-tight leading-none flex items-center gap-2">
-                <span>{isHindi ? 'सहाय' : 'SAHAY'}</span>
+                <span>{isMarathi ? 'सहाय' : isHindi ? 'सहाय' : 'SAHAY'}</span>
                 <span className="text-[10px] font-sans font-semibold text-teal-800 bg-teal-50 border border-teal-300 px-2 py-0.5 rounded-full">
-                  {isHindi ? 'नागरिक सुरक्षित पोर्टल' : 'Citizen Safe Space'}
+                  {isMarathi ? 'नागरिक सुरक्षित जागा' : isHindi ? 'नागरिक सुरक्षित पोर्टल' : 'Citizen Safe Space'}
                 </span>
               </div>
               <div className="text-[10px] text-stone-500 font-normal leading-tight mt-0.5">
-                {isHindi ? 'सामाजिक न्याय विभाग • आपका सुरक्षित स्थान' : 'Department of Social Justice & Empowerment'}
+                {isMarathi ? 'सामाजिक न्याय विभाग • तुमची सुरक्षित जागा' : isHindi ? 'सामाजिक न्याय विभाग • आपका सुरक्षित स्थान' : 'Department of Social Justice & Empowerment'}
               </div>
             </div>
           </Link>
@@ -121,7 +121,7 @@ export const CitizenLayout: React.FC = () => {
               title="Immediately exit this page safely"
             >
               <LogOut className="w-3.5 h-3.5" />
-              <span>{isHindi ? 'तुरंत बाहर निकलें' : 'Safe Exit'}</span>
+              <span>{isMarathi ? 'त्वरित बाहेर पडा' : isHindi ? 'तुरंत बाहर निकलें' : 'Safe Exit'}</span>
             </button>
           </div>
         </div>
@@ -133,7 +133,7 @@ export const CitizenLayout: React.FC = () => {
       </main>
 
       {/* Floating Sahay Mitra chat button (visible everywhere except /victim/chat) */}
-      <FloatingChatButton isHindi={isHindi} />
+      <FloatingChatButton isHindi={isHindi} isMarathi={isMarathi} />
 
       {/* Bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 bg-teal-950/95 backdrop-blur-sm border-t border-teal-800 flex justify-around items-center px-1 py-1.5 shadow-xl">
@@ -176,7 +176,7 @@ export const CitizenLayout: React.FC = () => {
   );
 };
 
-const FloatingChatButton: React.FC<{ isHindi: boolean }> = ({ isHindi }) => {
+const FloatingChatButton: React.FC<{ isHindi: boolean; isMarathi: boolean }> = ({ isHindi, isMarathi }) => {
   const location = useLocation();
   if (location.pathname === '/victim/chat') return null;
 
@@ -188,7 +188,7 @@ const FloatingChatButton: React.FC<{ isHindi: boolean }> = ({ isHindi }) => {
     >
       <MessageCircleHeart className="w-5 h-5 text-amber-300" />
       <span className="text-xs font-bold">
-        {isHindi ? 'मित्र से बात करें' : 'Talk to Sahay Mitra'}
+        {isMarathi ? 'मित्राशी बोला' : isHindi ? 'मित्र से बात करें' : 'Talk to Sahay Mitra'}
       </span>
       <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full ring-2 ring-white animate-pulse" />
     </Link>
