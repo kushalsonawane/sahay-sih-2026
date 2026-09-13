@@ -1,39 +1,25 @@
 import { Router, Response } from 'express';
 import { prisma } from '../../config/database.js';
-import { authenticate, authorize, AuthenticatedRequest } from '../../middleware/auth.js';
-import { auditLog } from '../../middleware/auditLog.js';
+import { optionalAuthenticate, AuthenticatedRequest } from '../../middleware/auth.js';
 
 const router = Router();
+router.use(optionalAuthenticate);
 
-// All cases routes require authentication
-router.use(authenticate);
-
-// GET /api/cases — list cases (filtered by role/district)
+// GET /api/cases — list cases (filtered by query)
 router.get('/', async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-  const { district, state, riskLevel, caseStage, search, page = '1', pageSize = '20' } = req.query;
+  const { district, state, riskLevel, caseStage, search, page = '1', pageSize = '50' } = req.query;
 
   const where: Record<string, unknown> = {};
 
-  // District officers can only see their district
-  if (req.user?.role === 'district_officer' && req.user.district) {
-    where.district = req.user.district;
-  } else if (req.user?.role === 'state_admin' && req.user.state) {
-    where.state = req.user.state;
-  } else if (req.user?.role === 'victim') {
-    // Victims see only their own case (by assigned officer matching their case)
-    // In production this would use a direct case↔user link
-    where.district = req.user.district;
-  }
-
-  if (district) where.district = district;
-  if (state) where.state = state;
-  if (riskLevel) where.riskLevel = riskLevel;
-  if (caseStage) where.caseStage = caseStage;
+  if (district) where.district = String(district);
+  if (state) where.state = String(state);
+  if (riskLevel) where.riskLevel = String(riskLevel);
+  if (caseStage) where.caseStage = String(caseStage);
   if (search) {
     where.OR = [
-      { caseRef: { contains: search } },
-      { personNameMasked: { contains: search } },
-      { district: { contains: search } },
+      { caseRef: { contains: String(search) } },
+      { personNameMasked: { contains: String(search) } },
+      { district: { contains: String(search) } },
     ];
   }
 
@@ -63,16 +49,20 @@ router.get('/', async (req: AuthenticatedRequest, res: Response): Promise<void> 
   });
 });
 
-// GET /api/cases/:id — case detail (with audit log)
+// GET /api/cases/:id — case detail
 router.get(
   '/:id',
-  auditLog('VIEW_CASE', 'Case'),
   async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-    const caseData = await prisma.case.findUnique({
-      where: { id: req.params.id },
+    const caseData = await prisma.case.findFirst({
+      where: {
+        OR: [
+          { id: req.params.id },
+          { caseRef: req.params.id },
+        ],
+      },
       include: {
-        checkIns: { orderBy: { submittedAt: 'desc' }, take: 10 },
-        alerts: { orderBy: { detectedAt: 'desc' }, take: 10 },
+        checkIns: { orderBy: { submittedAt: 'desc' }, take: 20 },
+        alerts: { orderBy: { detectedAt: 'desc' }, take: 20 },
         interventions: { orderBy: { createdAt: 'desc' } },
         appointments: { orderBy: { scheduledAt: 'asc' } },
         timeline: { orderBy: { date: 'desc' } },
@@ -88,22 +78,46 @@ router.get(
   }
 );
 
-// PATCH /api/cases/:id — update case (officer/admin only)
+// PATCH /api/cases/:id — update case
 router.patch(
   '/:id',
-  authorize('district_officer', 'state_admin', 'national_officer'),
-  auditLog('UPDATE_CASE', 'Case'),
   async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-    const { nextAction, nextActionDue, notes, assignedCounsellorId, assignedOfficerId } = req.body;
+    const {
+      nextAction,
+      nextActionDue,
+      notes,
+      assignedCounsellorId,
+      assignedOfficerId,
+      riskLevel,
+      distressScore,
+      caseStage,
+    } = req.body;
+
+    const targetCase = await prisma.case.findFirst({
+      where: {
+        OR: [
+          { id: req.params.id },
+          { caseRef: req.params.id },
+        ],
+      },
+    });
+
+    if (!targetCase) {
+      res.status(404).json({ success: false, message: 'Case not found' });
+      return;
+    }
 
     const updated = await prisma.case.update({
-      where: { id: req.params.id },
+      where: { id: targetCase.id },
       data: {
         ...(nextAction !== undefined && { nextAction }),
         ...(nextActionDue !== undefined && { nextActionDue: new Date(nextActionDue) }),
         ...(notes !== undefined && { notes }),
         ...(assignedCounsellorId !== undefined && { assignedCounsellorId }),
         ...(assignedOfficerId !== undefined && { assignedOfficerId }),
+        ...(riskLevel !== undefined && { riskLevel }),
+        ...(distressScore !== undefined && { distressScore: Number(distressScore) }),
+        ...(caseStage !== undefined && { caseStage }),
       },
     });
 
@@ -112,3 +126,4 @@ router.patch(
 );
 
 export default router;
+

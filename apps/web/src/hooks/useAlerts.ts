@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { Alert, AlertStatus } from '@sahay/shared';
 import { mockAlerts } from '../data/mockAlerts';
+import api from '../lib/api';
 
 const ALERTS_STORAGE_KEY = 'sahay_alerts_state';
 
@@ -15,6 +16,9 @@ export function useAlerts() {
     return mockAlerts;
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+  const isFetchingRef = useRef(false);
+
   useEffect(() => {
     try {
       localStorage.setItem(ALERTS_STORAGE_KEY, JSON.stringify(alerts));
@@ -22,6 +26,37 @@ export function useAlerts() {
       // ignore
     }
   }, [alerts]);
+
+  const fetchAlerts = useCallback(async () => {
+    if (isFetchingRef.current) return;
+    isFetchingRef.current = true;
+    try {
+      const res = await api.get('/alerts');
+      if (res.data?.success && Array.isArray(res.data.data?.items) && res.data.data.items.length > 0) {
+        setAlerts(res.data.data.items);
+      }
+    } catch {
+      // Keep local state on network error
+    } finally {
+      isFetchingRef.current = false;
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchAlerts();
+    const interval = setInterval(fetchAlerts, 5000);
+
+    const handleSync = () => fetchAlerts();
+    window.addEventListener('sahay:checkin-submitted', handleSync);
+    window.addEventListener('storage', handleSync);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('sahay:checkin-submitted', handleSync);
+      window.removeEventListener('storage', handleSync);
+    };
+  }, [fetchAlerts]);
 
   const updateAlertStatus = (id: string, status: AlertStatus, resolutionNote?: string) => {
     setAlerts((prev) =>
@@ -36,6 +71,10 @@ export function useAlerts() {
           : a
       )
     );
+
+    api.patch(`/alerts/${id}`, { status, resolutionNote }).catch(() => {
+      // ignore in local mode
+    });
   };
 
   const acknowledgeAlert = (id: string) => updateAlertStatus(id, 'acknowledged');
@@ -48,7 +87,20 @@ export function useAlerts() {
       id: `alt-${Date.now()}`,
       detectedAt: new Date().toISOString(),
     };
-    setAlerts((prev) => [alert, ...prev]);
+
+    setAlerts((prev) => [alert, ...prev.filter((a) => a.id !== alert.id)]);
+
+    api.post('/alerts', newAlert)
+      .then((res) => {
+        if (res.data?.data) {
+          const serverAlert = res.data.data;
+          setAlerts((prev) => [serverAlert, ...prev.filter((a) => a.id !== alert.id && a.id !== serverAlert.id)]);
+        }
+      })
+      .catch(() => {
+        // ignore in local mode
+      });
+
     return alert;
   };
 
@@ -58,11 +110,14 @@ export function useAlerts() {
 
   return {
     alerts,
+    isLoading,
     updateAlertStatus,
     acknowledgeAlert,
     escalateAlert,
     resolveAlert,
     addAlert,
     getAlertsByCaseId,
+    refreshAlerts: fetchAlerts,
   };
 }
+

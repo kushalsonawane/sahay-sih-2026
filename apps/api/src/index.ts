@@ -43,7 +43,10 @@ app.use(
       if (
         requestOrigin.endsWith('.vercel.app') ||
         requestOrigin.includes('localhost') ||
-        requestOrigin.includes('127.0.0.1')
+        requestOrigin.includes('127.0.0.1') ||
+        /^http:\/\/192\.168\./.test(requestOrigin) ||
+        /^http:\/\/10\./.test(requestOrigin) ||
+        /^http:\/\/172\.(1[6-9]|2\d|3[01])\./.test(requestOrigin)
       ) {
         return callback(null, true);
       }
@@ -105,10 +108,11 @@ app.use(notFound);
 app.use(errorHandler);
 
 // ---- Start server ----
-app.listen(config.port, () => {
-  console.log(`\n🌟 SAHAY API running on http://localhost:${config.port}`);
+app.listen(config.port, '0.0.0.0', () => {
+  console.log(`\n🌟 SAHAY API running on http://0.0.0.0:${config.port}`);
   console.log(`   Environment: ${config.nodeEnv}`);
   console.log(`   Health check: http://localhost:${config.port}/api/health`);
+  console.log(`   Network access: http://<your-local-IP>:${config.port}`);
   console.log(`\n⚠️  Smart India Hackathon Prototype — Demo data only\n`);
 });
 

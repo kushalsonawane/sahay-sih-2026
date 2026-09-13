@@ -70,3 +70,56 @@ export function authorize(...roles: string[]) {
     next();
   };
 }
+
+export async function optionalAuthenticate(
+  req: AuthenticatedRequest,
+  _res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const authHeader = req.headers.authorization;
+    if (authHeader?.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      const decoded = jwt.verify(token, config.jwt.secret) as {
+        id: string;
+        email: string;
+        role: string;
+      };
+
+      const user = await prisma.user.findUnique({
+        where: { id: decoded.id, isActive: true },
+        select: { id: true, email: true, role: true, name: true, district: true, state: true },
+      });
+
+      if (user) {
+        req.user = {
+          ...user,
+          district: user.district ?? undefined,
+          state: user.state ?? undefined,
+        };
+        return next();
+      }
+    }
+  } catch {
+    // Proceed to fallback
+  }
+
+  // Fallback demo user context so demo requests without JWT work smoothly
+  try {
+    const demoUser = await prisma.user.findFirst({
+      where: { role: 'district_officer' },
+      select: { id: true, email: true, role: true, name: true, district: true, state: true },
+    });
+    if (demoUser) {
+      req.user = {
+        ...demoUser,
+        district: demoUser.district ?? undefined,
+        state: demoUser.state ?? undefined,
+      };
+    }
+  } catch {
+    // ignore
+  }
+
+  next();
+}

@@ -111,7 +111,7 @@ export const CaseTable: React.FC<CaseTableProps> = ({ cases }) => {
                 <td className="py-3.5 px-4 text-right">
                   <Link
                     to={`/cases/${c.id}`}
-                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-navy-900 hover:bg-navy-800 text-white font-medium text-[11px] transition shadow-2xs group-hover:ring-2 group-hover:ring-navy-800/30"
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium text-[11px] transition shadow-2xs group-hover:ring-2 group-hover:ring-primary/30"
                   >
                     <span>View Case</span>
                     <ArrowRight className="w-3 h-3" />
