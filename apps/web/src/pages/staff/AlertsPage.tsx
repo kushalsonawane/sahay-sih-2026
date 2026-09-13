@@ -8,7 +8,7 @@ import { AlertTriangle, Filter, CheckCircle2 } from 'lucide-react';
 
 export const AlertsPage: React.FC = () => {
   const { alerts, acknowledgeAlert, escalateAlert, resolveAlert } = useAlerts();
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   const [selectedSeverity, setSelectedSeverity] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');

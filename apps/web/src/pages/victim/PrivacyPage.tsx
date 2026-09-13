@@ -4,7 +4,7 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { Shield, Lock, Eye, CheckCircle2, UserCheck, AlertCircle } from 'lucide-react';
 
 export const PrivacyPage: React.FC = () => {
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2">

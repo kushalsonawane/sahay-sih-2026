@@ -24,7 +24,7 @@ import {
 export const DashboardPage: React.FC = () => {
   const { cases } = useCases();
   const { alerts, acknowledgeAlert, escalateAlert, resolveAlert } = useAlerts();
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   const criticalAlerts = alerts.filter(
     (a) => (a.severity === 'critical' || a.severity === 'high') && a.status !== 'resolved'

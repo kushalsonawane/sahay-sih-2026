@@ -6,7 +6,7 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { ShieldCheck, Lock, User, Clock, FileText, CheckCircle2 } from 'lucide-react';
 
 export const AuditLogPage: React.FC = () => {
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">

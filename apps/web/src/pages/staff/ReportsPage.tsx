@@ -6,7 +6,7 @@ import { Download, FileText, CheckCircle2, Calendar, FileSpreadsheet, Eye } from
 
 export const ReportsPage: React.FC = () => {
   const { cases } = useCases();
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
   const [downloadSuccess, setDownloadSuccess] = useState<string | null>(null);
 
   const reports = [

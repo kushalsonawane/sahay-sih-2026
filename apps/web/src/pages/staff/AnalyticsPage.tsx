@@ -8,7 +8,7 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { BarChart3, TrendingUp, Shield, Clock, FileCheck, Building } from 'lucide-react';
 
 export const AnalyticsPage: React.FC = () => {
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">

@@ -30,7 +30,7 @@ import {
 export const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
   const setDemoRole = useAuthStore((s) => s.setDemoRole);
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   const handleRoleNavigate = (role: any, path: string) => {
     setDemoRole(role);

@@ -614,7 +614,7 @@ const QUICK_PROMPTS_HI = [
 
 /* ─────────────────────── Main Component ─────────────────────────── */
 export const ChatPage: React.FC = () => {
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState<Message[]>([
@@ -1238,7 +1238,7 @@ const TypingIndicator: React.FC<{ isHindi: boolean }> = ({ isHindi }) => (
           ))}
         </div>
         <span className="text-xs text-stone-500">
-          {(isMarathi || isHindi) ? 'सहाय मित्र विचार कर रहे हैं…' : 'Sahay Mitra is reflecting…'}
+          {(false || isHindi) ? 'सहाय मित्र विचार कर रहे हैं…' : 'Sahay Mitra is reflecting…'}
         </span>
       </div>
     </div>
@@ -1310,7 +1310,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
       <div className="flex items-center gap-2 mb-3">
         <Sparkles className="w-4 h-4 text-teal-800" />
         <h3 className="font-serif font-bold text-sm text-teal-950">
-          {(isMarathi || isHindi) ? '5-4-3-2-1 संवेदी ग्राउंडिंग अभ्यास' : '5-4-3-2-1 Sensory Grounding Tool'}
+          {(false || isHindi) ? '5-4-3-2-1 संवेदी ग्राउंडिंग अभ्यास' : '5-4-3-2-1 Sensory Grounding Tool'}
         </h3>
         <span className="text-[11px] px-2 py-0.5 bg-teal-100 text-teal-900 rounded-full font-medium ml-auto mr-6">
           Step {step + 1} / 5
@@ -1324,7 +1324,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
           </div>
           <div>
             <h4 className="font-bold text-xs sm:text-sm text-stone-900">
-              {(isMarathi || isHindi) ? current.titleHi : current.title}
+              {(false || isHindi) ? current.titleHi : current.title}
             </h4>
             <span className="text-[10px] text-stone-400">
               {current.count} sensory anchor points
@@ -1333,7 +1333,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
         </div>
 
         <p className="text-xs text-stone-600 leading-relaxed pt-1">
-          {(isMarathi || isHindi) ? current.descHi : current.desc}
+          {(false || isHindi) ? current.descHi : current.desc}
         </p>
       </div>
 
@@ -1343,7 +1343,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
           disabled={step === 0}
           className="px-3 py-1 rounded-lg text-xs font-semibold bg-white border border-stone-200 disabled:opacity-40"
         >
-          {(isMarathi || isHindi) ? 'पिछला' : 'Previous'}
+          {(false || isHindi) ? 'पिछला' : 'Previous'}
         </button>
 
         {step < steps.length - 1 ? (
@@ -1351,7 +1351,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
             onClick={() => setStep((s) => s + 1)}
             className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-teal-800 hover:bg-teal-700 text-white transition shadow-2xs"
           >
-            {(isMarathi || isHindi) ? 'अगला कदम →' : 'Next Step →'}
+            {(false || isHindi) ? 'अगला कदम →' : 'Next Step →'}
           </button>
         ) : (
           <button
@@ -1359,7 +1359,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
             className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white transition shadow-2xs flex items-center gap-1"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>{(isMarathi || isHindi) ? 'पूरा हुआ (धन्यवाद)' : 'Complete (I feel calmer)'}</span>
+            <span>{(false || isHindi) ? 'पूरा हुआ (धन्यवाद)' : 'Complete (I feel calmer)'}</span>
           </button>
         )}
       </div>
@@ -1456,7 +1456,7 @@ const BreathingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
       <div className="flex items-center gap-2 mb-3">
         <Wind className="w-4 h-4 text-teal-400" />
         <h3 className="font-serif font-bold text-sm text-slate-100">
-          {(isMarathi || isHindi) ? '4-2-6 शामक श्वास व्यायाम' : '4-2-6 Trauma Calming Breath'}
+          {(false || isHindi) ? '4-2-6 शामक श्वास व्यायाम' : '4-2-6 Trauma Calming Breath'}
         </h3>
         {running && (
           <span className="text-[11px] text-teal-300 ml-auto mr-6">
@@ -1477,14 +1477,14 @@ const BreathingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
 
         <div className="space-y-1">
           <p className="text-base sm:text-lg font-bold text-white font-serif">
-            {running ? ((isMarathi || isHindi) ? cur.nameHi : cur.name) : (isMarathi || isHindi) ? 'शुरू करने के लिए क्लिक करें' : 'Ready to begin'}
+            {running ? ((false || isHindi) ? cur.nameHi : cur.name) : (false || isHindi) ? 'शुरू करने के लिए क्लिक करें' : 'Ready to begin'}
           </p>
           <p className="text-xs text-slate-300">
             {running
-              ? (isMarathi || isHindi)
+              ? (false || isHindi)
                 ? 'शांत और लयबद्ध गति से पालन करें'
                 : 'Follow the gentle rhythm to ease racing heartbeat'
-              : (isMarathi || isHindi)
+              : (false || isHindi)
               ? '4 चक्र, धीमी और गहरी सांसें'
               : '4 soothing cycles of trauma-informed breath'}
           </p>
@@ -1501,7 +1501,7 @@ const BreathingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
               : 'bg-teal-500 hover:bg-teal-400 text-slate-950'
           )}
         >
-          {running ? ((isMarathi || isHindi) ? 'रोकें' : 'Stop') : (isMarathi || isHindi) ? 'शुरू करें' : 'Start Calming Breath'}
+          {running ? ((false || isHindi) ? 'रोकें' : 'Stop') : (false || isHindi) ? 'शुरू करें' : 'Start Calming Breath'}
         </button>
       </div>
     </div>
@@ -1529,7 +1529,7 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
       <div className="flex items-center gap-2 mb-3">
         <Scale className="w-4 h-4 text-amber-800" />
         <h3 className="font-serif font-bold text-sm text-stone-900">
-          {(isMarathi || isHindi)
+          {(false || isHindi)
             ? 'SC/ST अधिनियम वैधानिक मुआवजा कैलकुलेटर (नियम 12)'
             : 'SC/ST Act Statutory Relief Calculator (Rule 12)'}
         </h3>
@@ -1538,7 +1538,7 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
       {/* Select Category */}
       <div className="space-y-1 mb-3">
         <label className="text-[11px] font-semibold text-stone-600">
-          {(isMarathi || isHindi) ? 'अत्याचार / घटना की श्रेणी चुनें:' : 'Select Atrocity / Offence Category:'}
+          {(false || isHindi) ? 'अत्याचार / घटना की श्रेणी चुनें:' : 'Select Atrocity / Offence Category:'}
         </label>
         <select
           value={selectedIdx}
@@ -1547,7 +1547,7 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
         >
           {RELIEF_SCALES.map((item, idx) => (
             <option key={idx} value={idx}>
-              {(isMarathi || isHindi) ? item.categoryHi : item.category}
+              {(false || isHindi) ? item.categoryHi : item.category}
             </option>
           ))}
         </select>
@@ -1557,7 +1557,7 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
       <div className="bg-white rounded-xl p-3.5 border border-amber-200 shadow-2xs space-y-2">
         <div className="flex items-center justify-between">
           <span className="text-xs text-stone-500 font-medium">
-            {(isMarathi || isHindi) ? 'वैधानिक राहत राशि' : 'Mandated Relief Scale'}
+            {(false || isHindi) ? 'वैधानिक राहत राशि' : 'Mandated Relief Scale'}
           </span>
           <span className="text-base font-bold text-emerald-800 font-mono">
             {selected.amount}
@@ -1566,14 +1566,14 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
 
         <div className="pt-2 border-t border-stone-100 space-y-1">
           <p className="text-[11px] font-semibold text-stone-800">
-            {(isMarathi || isHindi) ? 'भुगतान प्रक्रिया (नियम 12(4)):' : 'Mandatory Disbursement Timeline:'}
+            {(false || isHindi) ? 'भुगतान प्रक्रिया (नियम 12(4)):' : 'Mandatory Disbursement Timeline:'}
           </p>
           <p className="text-xs text-stone-600 leading-relaxed">{selected.schedule}</p>
         </div>
       </div>
 
       <p className="text-[10px] text-stone-500 mt-2">
-        {(isMarathi || isHindi)
+        {(false || isHindi)
           ? '* यह राशि पीड़ित का कानूनी अधिकार है। जिला प्रशासन 7 दिनों में प्रथम किश्त देने के लिए बाध्य है।'
           : '* Guaranteed under the SC/ST (PoA) Amendment Rules, 2016. DM must release initial tranche within 7 days.'}
       </p>

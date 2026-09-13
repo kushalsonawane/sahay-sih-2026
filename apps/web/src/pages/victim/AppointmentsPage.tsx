@@ -6,7 +6,7 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { CalendarCheck, Clock, User, Shield, CheckCircle2 } from 'lucide-react';
 
 export const AppointmentsPage: React.FC = () => {
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2">

@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 export const SupportPage: React.FC = () => {
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   const rights = [
     {

@@ -6,7 +6,7 @@ import { Settings, Shield, Bell, RotateCcw, CheckCircle2 } from 'lucide-react';
 
 export const SettingsPage: React.FC = () => {
   const { resetToDefault } = useCases();
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
   const [resetDone, setResetDone] = useState(false);
 
   const [threshold, setThreshold] = useState(70);

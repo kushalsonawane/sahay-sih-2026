@@ -8,7 +8,7 @@ import { HeartHandshake, Filter, Plus, Check } from 'lucide-react';
 
 export const InterventionsPage: React.FC = () => {
   const { interventions, updateInterventionStatus, approveIntervention } = useInterventions();
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   const [selectedType, setSelectedType] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');

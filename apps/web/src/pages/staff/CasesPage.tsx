@@ -9,7 +9,7 @@ import { FolderGit2, Download, Plus, Shield } from 'lucide-react';
 
 export const CasesPage: React.FC = () => {
   const { cases } = useCases();
-  const { isHindi, isMarathi, isMarathi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRisk, setSelectedRisk] = useState('all');
