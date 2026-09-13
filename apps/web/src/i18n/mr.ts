@@ -1,6 +1,4 @@
-import type { TranslationKey } from './en';
-
-export const mr: TranslationKey = {
+export const mr = {
   // App
   appName: 'सहाय',
   appSubtitle: 'पीडित, तक्रारदार आणि साक्षीदारांसाठी मानवकेंद्रित कल्याण देखरेख प्रणाली',
