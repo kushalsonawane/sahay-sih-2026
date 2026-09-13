@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { useAccessibilityStore, useAuthStore } from '../store/authStore';
@@ -35,6 +35,14 @@ export const GovernmentHeader: React.FC = () => {
     navigate(path);
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (largeText) {
+      document.documentElement.classList.add('text-mode-large');
+    } else {
+      document.documentElement.classList.remove('text-mode-large');
+    }
+  }, [largeText]);
 
   return (
     <header className="w-full bg-white border-b border-stone-300 select-none">
