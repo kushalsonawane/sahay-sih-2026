@@ -116,27 +116,6 @@ export const GovernmentFooter: React.FC = () => {
         </div>
       </div>
 
-      {/* Official Government Logos Strip */}
-      <div className="bg-[#05182a] border-t border-slate-800 py-3 px-4">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-around gap-4 text-slate-400 text-[11px] font-bold">
-          <div className="flex items-center gap-2">
-            <span className="text-amber-400">🇮🇳</span>
-            <span>Digital India (डिजिटल भारत)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-teal-400">🏛️</span>
-            <span>National Informatics Centre (NIC)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-orange-400">🕊️</span>
-            <span>Swachh Bharat Abhiyan</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-emerald-400">🛡️</span>
-            <span>STQC Certified Quality (GIGW 3.0)</span>
-          </div>
-        </div>
-      </div>
 
       {/* Mandatory GIGW Copyright & Host Attribution */}
       <div className="bg-[#030e19] text-slate-400 text-[11px] py-4 px-4 sm:px-6 border-t border-slate-800">
@@ -149,17 +128,16 @@ export const GovernmentFooter: React.FC = () => {
               </strong>.
             </p>
             <p className="text-slate-400 text-[10px]">
-              Website Designed, Developed and Hosted by{' '}
-              <strong className="text-slate-200">National Informatics Centre (NIC)</strong>. Supports Google Chrome 6.0+, Firefox 2.0+, Safari 4.0+, Edge. Minimum resolution: 1024×768.
+              Platform Designed and Developed for Smart India Hackathon (SIH 2026). Supports all modern browsers and accessible devices.
             </p>
           </div>
 
           <div className="shrink-0 text-center sm:text-right space-y-0.5 pt-2 sm:pt-0">
-            <div className="text-[11px] text-amber-300 font-mono font-bold">
-              Visitor Count: 2,49,58,164
+            <div className="text-[11px] text-amber-300 font-bold">
+              Smart India Hackathon 2026 Prototype
             </div>
             <div className="text-[10px] text-slate-400">
-              Last Updated: 13 September 2026
+              Last Updated: 14 September 2026
             </div>
           </div>
         </div>

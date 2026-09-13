@@ -4,6 +4,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import type { UserRole } from '@sahay/shared';
 import { Shield, User, Stethoscope, Scale, Building2, Globe, Type, Compass, Layout } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { LanguageSlider } from './LanguageSlider';
 
 export const RoleSwitcher: React.FC = () => {
   const activeRole = useActiveRole();
@@ -106,14 +107,7 @@ export const RoleSwitcher: React.FC = () => {
 
         {/* Right: Language toggle & Accessibility */}
         <div className="flex items-center gap-2 ml-auto">
-          <button
-            onClick={toggleLanguage}
-            className="inline-flex items-center gap-1 px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 transition font-medium border border-slate-700 text-[11px]"
-            title="Toggle language between English and Hindi"
-          >
-            <Globe className="w-3.5 h-3.5 text-teal-400" />
-            <span>{language === 'en' ? 'हिंदी' : 'English'}</span>
-          </button>
+          <LanguageSlider />
 
           <button
             onClick={toggleLargeText}

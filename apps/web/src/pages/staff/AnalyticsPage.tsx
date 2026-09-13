@@ -100,18 +100,18 @@ export const AnalyticsPage: React.FC = () => {
                       <div className="font-bold text-stone-900">{d.district}</div>
                       <div className="text-stone-500 text-[11px]">{d.state}</div>
                     </td>
-                    <td className="py-3.5 px-4 font-serif font-bold text-stone-900 text-sm">
+                    <td className="py-3.5 px-4 font-sans font-bold tabular-nums text-stone-900 text-sm">
                       {d.totalCases}
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 font-bold text-xs">
+                      <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 font-bold text-xs tabular-nums">
                         {d.highPriorityCases} Cases
                       </span>
                     </td>
-                    <td className="py-3.5 px-4 font-serif font-bold text-stone-800">
+                    <td className="py-3.5 px-4 font-sans font-bold tabular-nums text-stone-800">
                       {d.avgDistressScore} / 100
                     </td>
-                    <td className="py-3.5 px-4 font-medium text-emerald-800">
+                    <td className="py-3.5 px-4 font-semibold tabular-nums text-emerald-800">
                       {d.checkInCompletionRate}%
                     </td>
                     <td className="py-3.5 px-4 w-48">

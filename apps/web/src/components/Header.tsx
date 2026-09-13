@@ -3,7 +3,7 @@ import { useActiveRole } from '../store/authStore';
 import { useLanguage } from '../hooks/useLanguage';
 import { Bell, Search, Compass } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { AshokaEmblem, SwachhBharatLogo } from './NationalEmblem';
+import { AshokaEmblem } from './NationalEmblem';
 
 export const Header: React.FC = () => {
   const activeRole = useActiveRole();
@@ -62,10 +62,7 @@ export const Header: React.FC = () => {
 
         {/* Action Controls */}
         <div className="flex items-center gap-3">
-          {/* Swachh Bharat in Header */}
-          <div className="hidden xl:block">
-            <SwachhBharatLogo className="h-8" />
-          </div>
+
 
           {/* Return to Presentation Hub button */}
           <Link

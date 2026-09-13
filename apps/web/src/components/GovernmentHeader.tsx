@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { useAccessibilityStore, useAuthStore } from '../store/authStore';
-import { AshokaEmblem, SwachhBharatLogo, AzadiMahotsavBadge, AtrocityHelplineBadge } from './NationalEmblem';
+import { AshokaEmblem, AzadiMahotsavBadge, AtrocityHelplineBadge } from './NationalEmblem';
+import { LanguageSlider } from './LanguageSlider';
 import {
   Globe,
   Type,
@@ -106,15 +107,8 @@ export const GovernmentHeader: React.FC = () => {
               </button>
             </div>
 
-            {/* Language Switcher */}
-            <button
-              onClick={toggleLanguage}
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 transition"
-              title="Change Language / भाषा बदला"
-            >
-              <Globe className="w-3 h-3 text-teal-400" />
-              <span>{language === 'en' ? 'English' : language === 'hi' ? 'हिन्दी' : 'मराठी'}</span>
-            </button>
+            {/* Language Switcher Slider */}
+            <LanguageSlider />
 
             {/* SIH 2026 Tag */}
             <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold text-[10px] tracking-wider">
@@ -157,7 +151,6 @@ export const GovernmentHeader: React.FC = () => {
 
         {/* Right: National Campaigns & 14566 Helpline */}
         <div className="hidden lg:flex items-center gap-4">
-          <SwachhBharatLogo className="h-10" />
           <AzadiMahotsavBadge className="h-10" />
           <AtrocityHelplineBadge />
         </div>
@@ -303,13 +296,8 @@ export const GovernmentHeader: React.FC = () => {
               {(isMarathi || isHindi) ? 'राज्य / राष्ट्रीय प्रशासन' : 'State / National Analytics'}
             </button>
             <div className="pt-2 border-t border-slate-700 flex items-center justify-between">
-              <span className="text-amber-300 font-bold">Helpline: 14566</span>
-              <button
-                onClick={toggleLanguage}
-                className="px-2 py-1 rounded bg-slate-700 text-white"
-              >
-                {language === 'en' ? 'हिन्दी में देखें' : 'View in English'}
-              </button>
+              <span className="text-amber-300 font-bold text-xs">Helpline: 14566</span>
+              <LanguageSlider />
             </div>
           </div>
         )}
