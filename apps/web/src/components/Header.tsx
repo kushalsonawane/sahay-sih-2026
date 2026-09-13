@@ -7,7 +7,7 @@ import { AshokaEmblem } from './NationalEmblem';
 
 export const Header: React.FC = () => {
   const activeRole = useActiveRole();
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   return (
     <header className="bg-white border-b-2 border-stone-300 sticky top-0 z-40 shadow-xs">
@@ -42,18 +42,20 @@ export const Header: React.FC = () => {
           </div>
           <div>
             <div className="text-[10px] sm:text-[11px] font-bold text-stone-700 font-serif leading-tight">
-              सामाजिक न्याय और अधिकारिता विभाग • DoSJE
+              {isMarathi ? 'सामाजिक न्याय आणि अधिकारिता विभाग • DoSJE' : 'सामाजिक न्याय और अधिकारिता विभाग • DoSJE'}
             </div>
             <div className="flex items-center gap-2">
               <span className="text-lg sm:text-xl font-black tracking-tight text-[#0B3B60] font-serif">
-                {isHindi ? 'सहाय' : 'SAHAY'}
+                {isMarathi ? 'सहाय' : isHindi ? 'सहाय' : 'SAHAY'}
               </span>
               <span className="text-[10px] px-2 py-0.5 rounded bg-blue-50 text-[#0B3B60] font-bold border border-blue-200 uppercase">
-                {isHindi ? 'प्रशासनिक कंसोल' : 'Official Console'}
+                {isMarathi ? 'प्रशासकीय कन्सोल' : isHindi ? 'प्रशासनिक कंसोल' : 'Official Console'}
               </span>
             </div>
             <p className="text-[10px] sm:text-[11px] text-stone-500 hidden sm:block leading-tight">
-              {isHindi
+              {isMarathi
+                ? 'अत्याचार पीडितांसाठी मानसिक आरोग्य देखरेख व नियम १२ प्रणाली'
+                : isHindi
                 ? 'अत्याचार पीड़ितों के लिए गतिशील मानसिक स्वास्थ्य निगरानी'
                 : 'Atrocity Victim Distress Safeguard & Rule 12 Monitoring System'}
             </p>

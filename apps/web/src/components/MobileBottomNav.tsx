@@ -11,14 +11,14 @@ import {
 import { cn } from '../lib/cn';
 
 export const MobileBottomNav: React.FC = () => {
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
 
   const staffItems = [
-    { to: '/dashboard', label: isHindi ? 'डैशबोर्ड' : 'Dashboard', icon: <LayoutDashboard className="w-5 h-5" /> },
-    { to: '/cases', label: isHindi ? 'मामले' : 'Cases', icon: <FolderGit2 className="w-5 h-5" /> },
-    { to: '/alerts', label: isHindi ? 'अलर्ट' : 'Alerts', icon: <AlertTriangle className="w-5 h-5" /> },
-    { to: '/interventions', label: isHindi ? 'हस्तक्षेप' : 'Actions', icon: <HeartHandshake className="w-5 h-5" /> },
-    { to: '/analytics', label: isHindi ? 'आंकड़े' : 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
+    { to: '/dashboard', label: isMarathi ? 'डॅशबोर्ड' : isHindi ? 'डैशबोर्ड' : 'Dashboard', icon: <LayoutDashboard className="w-5 h-5" /> },
+    { to: '/cases', label: isMarathi ? 'प्रकरणे' : isHindi ? 'मामले' : 'Cases', icon: <FolderGit2 className="w-5 h-5" /> },
+    { to: '/alerts', label: isMarathi ? 'अलर्ट' : isHindi ? 'अलर्ट' : 'Alerts', icon: <AlertTriangle className="w-5 h-5" /> },
+    { to: '/interventions', label: isMarathi ? 'हस्तक्षेप' : isHindi ? 'हस्तक्षेप' : 'Actions', icon: <HeartHandshake className="w-5 h-5" /> },
+    { to: '/analytics', label: isMarathi ? 'आकडेवारी' : isHindi ? 'आंकड़े' : 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
   ];
 
   return (

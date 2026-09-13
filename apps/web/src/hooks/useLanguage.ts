@@ -18,7 +18,8 @@ export function useLanguage() {
     setLanguage,
     toggleLanguage,
     t,
-    isHindi: language === 'hi',
+    isHindi: language === 'hi' || language === 'mr',
+    isHindiOnly: language === 'hi',
     isMarathi: language === 'mr',
   };
 }

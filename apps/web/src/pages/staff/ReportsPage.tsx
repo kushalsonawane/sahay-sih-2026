@@ -155,27 +155,51 @@ export const ReportsPage: React.FC = () => {
   const reports = [
     {
       id: 'rep-rule12',
-      title: 'Rule 12 Monthly Atrocity Relief & Compensation Disbursement Register',
-      desc: 'Official return mandated under Rule 12(4) of the SC/ST PoA Rules, tracking mandatory 7-day 25% interim relief, DBT UTR confirmation, 50% chargesheet release, and final 25% conviction disbursement.',
-      frequency: 'Monthly (Due by 7th)',
+      title: isMarathi
+        ? 'नियम १२ मासिक अत्याचार निवारण व आर्थिक भरपाई वाटप नोंदवही'
+        : isHindi
+        ? 'नियम 12 मासिक अत्याचार निवारण एवं मुआवजा वितरण रजिस्टर'
+        : 'Rule 12 Monthly Atrocity Relief & Compensation Disbursement Register',
+      desc: isMarathi
+        ? 'अनुसूचित जाती/जमाती अत्याचार प्रतिबंधक नियम १२(४) अन्वये अनिवार्य ७-दिवसीय २५% अंतरिम मदत, डीबीटी यूटीआर पुष्टी, ५०% दोषारोपपत्र प्रकाशन आणि अंतिम २५% शिक्षा वितरण देखरेख.'
+        : isHindi
+        ? 'एससी/एसटी अत्याचार निवारण नियम 12(4) के तहत अनिवार्य 7-दिवसीय 25% अंतरिम राहत, डीबीटी यूटीआर पुष्टि, 50% चार्जशीट रिलीज और अंतिम 25% सजा वितरण निगरानी।'
+        : 'Official return mandated under Rule 12(4) of the SC/ST PoA Rules, tracking mandatory 7-day 25% interim relief, DBT UTR confirmation, 50% chargesheet release, and final 25% conviction disbursement.',
+      frequency: isMarathi ? 'मासिक (७ तारखेपर्यंत)' : isHindi ? 'मासिक (7 तारीख तक)' : 'Monthly (Due by 7th)',
       lastGenerated: '14 Sep 2026',
       icon: <Layers className="w-4 h-4 text-teal-800 shrink-0" />,
       tabKey: 'rule12' as const,
     },
     {
       id: 'rep-protection',
-      title: 'Section 15A Witness Protection & Intimidation Threat Audit',
-      desc: 'Comprehensive register mandated under Section 15A of the SC/ST Act, auditing threat reports, armed police escort deployment, safe transit quarters, CCTV coverage, and 4-hour SLA compliance.',
-      frequency: 'Fortnightly',
+      title: isMarathi
+        ? 'कलम १५A साक्षीदार संरक्षण व धमकी ऑडिट नोंदवही'
+        : isHindi
+        ? 'धारा 15A गवाह सुरक्षा एवं धमकी ऑडिट रजिस्टर'
+        : 'Section 15A Witness Protection & Intimidation Threat Audit',
+      desc: isMarathi
+        ? 'अत्याचार प्रतिबंधक कायद्याच्या कलम १५A अन्वये धमकी अहवाल, सशस्त्र पोलीस संरक्षण, सुरक्षित संक्रमण गृह, सीसीटीव्ही कव्हरेज आणि ४-तास एसएलए अनुपालनाचे सर्वसमावेशक ऑडिट.'
+        : isHindi
+        ? 'एससी/एसटी अधिनियम की धारा 15A के तहत धमकी रिपोर्ट, सशस्त्र पुलिस सुरक्षा, सुरक्षित आवास, सीसीटीवी कवरेज और 4 घंटे के एसएलए अनुपालन का व्यापक ऑडिट।'
+        : 'Comprehensive register mandated under Section 15A of the SC/ST Act, auditing threat reports, armed police escort deployment, safe transit quarters, CCTV coverage, and 4-hour SLA compliance.',
+      frequency: isMarathi ? 'पाक्षिक' : isHindi ? 'पाक्षिक' : 'Fortnightly',
       lastGenerated: '14 Sep 2026',
       icon: <ShieldCheck className="w-4 h-4 text-indigo-800 shrink-0" />,
       tabKey: 'protection' as const,
     },
     {
       id: 'rep-distress',
-      title: 'District-Wise Multi-Channel Check-In Adherence & Distress Trajectory',
-      desc: 'Statistical trajectory across IVRS automated calls, SMS pulses, and Citizen Safe App check-ins, identifying high-distress clusters and tracking DM emergency interventions.',
-      frequency: 'Weekly',
+      title: isMarathi
+        ? 'जिल्हानिहाय बहु-माध्यम चेक-इन पालन व संकट प्रवृत्ती'
+        : isHindi
+        ? 'जिला-वार मल्टी-चैनल चेक-इन अनुपालन एवं संकट प्रक्षेपवक्र'
+        : 'District-Wise Multi-Channel Check-In Adherence & Distress Trajectory',
+      desc: isMarathi
+        ? 'आयव्हीआरएस स्वयंचलित कॉल्स, एसएमएस व सुरक्षित ॲपद्वारे नोंदवलेल्या प्रतिसादांचे विश्लेषण, तीव्र संकट क्षेत्रांची ओळख आणि जिल्हाधिकारी आपत्कालीन हस्तक्षेप ट्रॅकिंग.'
+        : isHindi
+        ? 'आईवीआरएस स्वचालित कॉल, एसएमएस और नागरिक सुरक्षित ऐप के माध्यम से चेक-इन का सांख्यिकीय विश्लेषण, उच्च-संकट समूहों की पहचान और डीएम हस्तक्षेप ट्रैकिंग।'
+        : 'Statistical trajectory across IVRS automated calls, SMS pulses, and Citizen Safe App check-ins, identifying high-distress clusters and tracking DM emergency interventions.',
+      frequency: isMarathi ? 'साप्ताहिक' : isHindi ? 'साप्ताहिक' : 'Weekly',
       lastGenerated: 'Today, 06:00 IST',
       icon: <Activity className="w-4 h-4 text-emerald-800 shrink-0" />,
       tabKey: 'distress' as const,
@@ -186,12 +210,16 @@ export const ReportsPage: React.FC = () => {
     <div className="space-y-6 max-w-5xl mx-auto">
       <PageHeader
         title={
-          (isMarathi || isHindi)
+          isMarathi
+            ? 'वैधानिक अनुपालन आणि अहवाल जनरेटर'
+            : isHindi
             ? 'वैधानिक अनुपालन एवं रिपोर्ट जनरेटर'
             : 'Statutory Compliance & Reports Generator'
         }
         subtitle={
-          (isMarathi || isHindi)
+          isMarathi
+            ? 'सामाजिक न्याय आणि अधिकारिता मंत्रालय व विशेष न्यायालयांसाठी अधिकृत अहवाल आणि डेटा संच'
+            : isHindi
             ? 'सामाजिक न्याय और अधिकारिता मंत्रालय एवं विशेष अदालतों के लिए आधिकारिक रिपोर्ट'
             : 'Generate verifiable statutory returns, relief audit registers, and protection summaries for MoSJE review committees and Special Courts.'
         }
@@ -233,7 +261,7 @@ export const ReportsPage: React.FC = () => {
                   onClick={() => setActivePreviewTab(rep.tabKey)}
                   className="px-3 py-1.5 rounded-lg border border-stone-300 hover:bg-stone-50 text-stone-700 font-semibold text-xs transition"
                 >
-                  Preview Data
+                  {isMarathi ? 'डेटा पूर्वावलोकन' : isHindi ? 'डेटा पूर्वावलोकन' : 'Preview Data'}
                 </button>
                 <button
                   type="button"
@@ -241,7 +269,7 @@ export const ReportsPage: React.FC = () => {
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0B3B60] hover:bg-[#082944] text-white font-semibold text-xs shadow-2xs transition"
                 >
                   <Download className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Export CSV Dataset</span>
+                  <span>{isMarathi ? 'CSV डेटा संच डाउनलोड' : isHindi ? 'CSV डेटा निर्यात करें' : 'Export CSV Dataset'}</span>
                 </button>
               </div>
             </div>
@@ -254,10 +282,14 @@ export const ReportsPage: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h3 className="text-sm font-bold font-serif text-stone-900">
-              Live Statutory Dataset Preview
+              {isMarathi ? 'थेट वैधानिक डेटा पूर्वावलोकन' : isHindi ? 'लाइव वैधानिक डेटा पूर्वावलोकन' : 'Live Statutory Dataset Preview'}
             </h3>
             <p className="text-[11px] text-stone-500">
-              Inspect active dataset records before exporting to official CSV
+              {isMarathi
+                ? 'अधिकृत CSV मध्ये निर्यात करण्यापूर्वी सक्रिय डेटा नोंदी तपासा'
+                : isHindi
+                ? 'आधिकारिक सीएसवी में निर्यात करने से पहले सक्रिय डेटा रिकॉर्ड का निरीक्षण करें'
+                : 'Inspect active dataset records before exporting to official CSV'}
             </p>
           </div>
 
@@ -275,7 +307,7 @@ export const ReportsPage: React.FC = () => {
             className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-stone-900 text-white hover:bg-stone-800 text-xs font-semibold self-start sm:self-auto transition"
           >
             <Download className="w-3.5 h-3.5 text-amber-400" />
-            <span>Download Active Tab (.CSV)</span>
+            <span>{isMarathi ? 'सक्रिय टॅब डाउनलोड (.CSV)' : isHindi ? 'सक्रिय टैब डाउनलोड (.CSV)' : 'Download Active Tab (.CSV)'}</span>
           </button>
         </div>
 
@@ -290,7 +322,7 @@ export const ReportsPage: React.FC = () => {
                 : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            1. Rule 12 Relief Disbursement ({mockRule12Data.length} Records)
+            {isMarathi ? `१. नियम १२ भरपाई नोंदवही (${mockRule12Data.length} नोंदी)` : isHindi ? `1. नियम 12 राहत रजिस्टर (${mockRule12Data.length} रिकॉर्ड)` : `1. Rule 12 Relief Disbursement (${mockRule12Data.length} Records)`}
           </button>
           <button
             type="button"
@@ -301,7 +333,7 @@ export const ReportsPage: React.FC = () => {
                 : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            2. Section 15A Witness Protection ({mockProtectionData.length} Records)
+            {isMarathi ? `२. कलम १५A साक्षीदार संरक्षण (${mockProtectionData.length} नोंदी)` : isHindi ? `2. धारा 15A गवाह सुरक्षा (${mockProtectionData.length} रिकॉर्ड)` : `2. Section 15A Witness Protection (${mockProtectionData.length} Records)`}
           </button>
           <button
             type="button"
@@ -312,7 +344,7 @@ export const ReportsPage: React.FC = () => {
                 : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            3. District Adherence & Distress ({mockDistrictAdherenceData.length} Districts)
+            {isMarathi ? `३. जिल्हा संकट व पालन (${mockDistrictAdherenceData.length} जिल्हे)` : isHindi ? `3. जिला संकट एवं अनुपालन (${mockDistrictAdherenceData.length} जिले)` : `3. District Adherence & Distress (${mockDistrictAdherenceData.length} Districts)`}
           </button>
         </div>
 

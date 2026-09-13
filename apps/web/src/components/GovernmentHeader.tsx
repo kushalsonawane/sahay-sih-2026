@@ -136,14 +136,14 @@ export const GovernmentHeader: React.FC = () => {
               MINISTRY OF SOCIAL JUSTICE AND EMPOWERMENT
             </div>
             <div className="text-[10px] sm:text-[11px] font-semibold text-stone-600">
-              सामाजिक न्याय और अधिकारिता विभाग | Department of Social Justice and Empowerment
+              {isMarathi ? 'सामाजिक न्याय आणि अधिकारिता विभाग | Department of Social Justice and Empowerment' : 'सामाजिक न्याय और अधिकारिता विभाग | Department of Social Justice and Empowerment'}
             </div>
             <div className="pt-0.5 flex items-center gap-2">
               <span className="text-sm sm:text-base font-black text-amber-900 font-serif tracking-tight">
-                सहाय (SAHAY)
+                {isMarathi ? 'सहाय' : 'सहाय (SAHAY)'}
               </span>
               <span className="text-[10px] font-bold text-teal-900 bg-teal-50 border border-teal-300 px-2 py-0.2 rounded">
-                SC/ST PoA Monitoring & Distress Safeguard
+                {isMarathi ? 'अनुसूचित जाती/जमाती अत्याचार प्रतिबंधक व संकट संरक्षण' : 'SC/ST PoA Monitoring & Distress Safeguard'}
               </span>
             </div>
           </div>
@@ -183,7 +183,7 @@ export const GovernmentHeader: React.FC = () => {
                   : 'border-transparent text-white'
               }`}
             >
-              <span>{(isMarathi || isHindi) ? 'मुख्य पृष्ठ' : 'Home'}</span>
+              <span>{isMarathi ? 'मुख्य पृष्ठ' : isHindi ? 'मुख्य पृष्ठ' : 'Home'}</span>
             </Link>
 
             <button
@@ -195,7 +195,7 @@ export const GovernmentHeader: React.FC = () => {
               }`}
             >
               <Heart className="w-3.5 h-3.5 text-teal-300" />
-              <span>{(isMarathi || isHindi) ? 'नागरिक सुरक्षित पोर्टल' : 'Citizen Safe Portal'}</span>
+              <span>{isMarathi ? 'नागरिक सुरक्षित जागा' : isHindi ? 'नागरिक सुरक्षित पोर्टल' : 'Citizen Safe Portal'}</span>
             </button>
 
             <button
@@ -207,35 +207,35 @@ export const GovernmentHeader: React.FC = () => {
               }`}
             >
               <Scale className="w-3.5 h-3.5 text-amber-300" />
-              <span>{(isMarathi || isHindi) ? 'प्रशासनिक कंसोल (DM/SDM)' : 'Official Console (DM/SDM)'}</span>
+              <span>{isMarathi ? 'प्रशासकीय कन्सोल (DM/SDM)' : isHindi ? 'प्रशासनिक कंसोल (DM/SDM)' : 'Official Console (DM/SDM)'}</span>
             </button>
 
             <a
               href="#users"
               className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
             >
-              <span>{(isMarathi || isHindi) ? 'उपयोगकर्ता पोर्टल (#users)' : 'Stakeholder Portals (#users)'}</span>
+              <span>{isMarathi ? 'वापरकर्ता पोर्टल (#users)' : isHindi ? 'उपयोगकर्ता पोर्टल (#users)' : 'Stakeholder Portals (#users)'}</span>
             </a>
 
             <a
               href="#schemes"
               className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
             >
-              <span>{(isMarathi || isHindi) ? 'प्रमुख योजनाएं' : 'Schemes & Relief'}</span>
+              <span>{isMarathi ? 'प्रमुख योजना व मदत' : isHindi ? 'प्रमुख योजनाएं' : 'Schemes & Relief'}</span>
             </a>
 
             <a
               href="#acts"
               className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
             >
-              <span>{(isMarathi || isHindi) ? 'अधिनियम एवं नियम' : 'PoA Acts & Rules'}</span>
+              <span>{isMarathi ? 'कायदा आणि नियम' : isHindi ? 'अधिनियम एवं नियम' : 'PoA Acts & Rules'}</span>
             </a>
 
             <a
               href="#stats"
               className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
             >
-              <span>{(isMarathi || isHindi) ? 'सांख्यिकी' : 'Statistics'}</span>
+              <span>{isMarathi ? 'आकडेवारी' : isHindi ? 'सांख्यिकी' : 'Statistics'}</span>
             </a>
 
             <Link
@@ -243,7 +243,7 @@ export const GovernmentHeader: React.FC = () => {
               className="px-3.5 py-3 transition hover:bg-[#134975] text-amber-300 border-b-2 border-transparent flex items-center gap-1"
             >
               <Compass className="w-3.5 h-3.5 text-amber-400" />
-              <span>{(isMarathi || isHindi) ? 'SIH गाइड' : 'SIH Hub'}</span>
+              <span>{isMarathi ? 'SIH हब' : isHindi ? 'SIH गाइड' : 'SIH Hub'}</span>
             </Link>
           </div>
 
