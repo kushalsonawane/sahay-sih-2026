@@ -1,0 +1,1 @@
+{"version":3,"file":"mockTimeline.d.ts","sourceRoot":"","sources":["mockTimeline.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,UAAU,EAAE,WAAW,EAAE,aAAa,EAAE,MAAM,eAAe,CAAC;AAErF,eAAO,MAAM,YAAY,EAAE,OAAO,EA8EjC,CAAC;AAEF,eAAO,MAAM,eAAe,EAAE,UAAU,EA+EvC,CAAC;AAEF,eAAO,MAAM,gBAAgB,EAAE,WAAW,EA4BzC,CAAC;AAEF,eAAO,MAAM,kBAAkB,EAAE,aAAa,EAiE7C,CAAC"}
