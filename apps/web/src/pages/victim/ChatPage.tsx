@@ -614,14 +614,14 @@ const QUICK_PROMPTS_HI = [
 
 /* ─────────────────────── Main Component ─────────────────────────── */
 export const ChatPage: React.FC = () => {
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'welcome-0',
       sender: 'mitra',
-      text: responses.greeting[isHindi ? 'hi' : 'en'][0],
+      text: responses.greeting[(isMarathi || isHindi) ? 'hi' : 'en'][0],
       timestamp: new Date(),
       intent: 'greeting',
       chips: responses.greeting.chips,
@@ -781,7 +781,7 @@ export const ChatPage: React.FC = () => {
       await new Promise((r) => setTimeout(r, delay));
 
       const intentConfig = responses[intent] || responses.unknown;
-      const responsePool = intentConfig[isHindi ? 'hi' : 'en'];
+      const responsePool = intentConfig[(isMarathi || isHindi) ? 'hi' : 'en'];
       const chosenText = responsePool[Math.floor(Math.random() * responsePool.length)];
       const isEmergency = intent === 'crisis';
 
@@ -800,7 +800,7 @@ export const ChatPage: React.FC = () => {
         await new Promise((r) => setTimeout(r, 600));
         addMessage(
           'system',
-          isHindi
+          (isMarathi || isHindi)
             ? '⚠️ आपातकालीन अलर्ट: जिला कल्याण अधिकारी (SDM) एवं काउंसलर प्रिया शर्मा को उच्च प्राथमिकता अलर्ट भेजा गया।'
             : '⚠️ Emergency Protocol Activated: Immediate priority alert dispatched to SDM Dr. Rajesh Verma and Counsellor Priya Sharma.'
         );
@@ -847,7 +847,7 @@ export const ChatPage: React.FC = () => {
 
     try {
       const rec: ISpeechRecognition = new SR();
-      rec.lang = isHindi ? 'hi-IN' : 'en-IN';
+      rec.lang = (isMarathi || isHindi) ? 'hi-IN' : 'en-IN';
       rec.interimResults = false;
       rec.onresult = (e) => {
         const transcript = (e as ISREvent).results[0][0].transcript;
@@ -872,7 +872,7 @@ export const ChatPage: React.FC = () => {
       {
         id: Date.now().toString(),
         sender: 'mitra',
-        text: responses.greeting[isHindi ? 'hi' : 'en'][0],
+        text: responses.greeting[(isMarathi || isHindi) ? 'hi' : 'en'][0],
         timestamp: new Date(),
         intent: 'greeting',
         chips: responses.greeting.chips,
@@ -898,14 +898,14 @@ export const ChatPage: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-bold text-stone-900 font-serif leading-tight">
-                {isHindi ? 'सहाय मित्र' : 'Sahay Mitra'}
+                {(isMarathi || isHindi) ? 'सहाय मित्र' : 'Sahay Mitra'}
               </h1>
               <span className="text-[10px] font-semibold text-teal-800 bg-teal-50 border border-teal-200 px-1.5 py-0.5 rounded-full">
-                {isHindi ? '24/7 सक्रिय' : 'AI Companion'}
+                {(isMarathi || isHindi) ? '24/7 सक्रिय' : 'AI Companion'}
               </span>
             </div>
             <p className="text-[11px] text-stone-500 leading-tight">
-              {isHindi
+              {(isMarathi || isHindi)
                 ? 'गोपनीय मनोवैज्ञानिक प्राथमिक उपचार एवं कानूनी अधिकार साथी'
                 : 'Confidential Psychological First-Aid & Statutory Rights Companion'}
             </p>
@@ -926,7 +926,7 @@ export const ChatPage: React.FC = () => {
                 ? 'bg-amber-100 text-amber-900 border-amber-300 shadow-2xs'
                 : 'bg-white hover:bg-stone-100 text-stone-500 border-stone-200'
             )}
-            title={isHindi ? 'ऑटो-वॉइस वाचन ऑन/ऑफ' : 'Toggle auto-read aloud'}
+            title={(isMarathi || isHindi) ? 'ऑटो-वॉइस वाचन ऑन/ऑफ' : 'Toggle auto-read aloud'}
           >
             {autoSpeak ? (
               <Volume2 className="w-4 h-4 text-amber-700" />
@@ -934,7 +934,7 @@ export const ChatPage: React.FC = () => {
               <VolumeX className="w-4 h-4 text-stone-400" />
             )}
             <span className="hidden sm:inline text-[11px]">
-              {autoSpeak ? (isHindi ? 'आवाज़ चालू' : 'Audio On') : (isHindi ? 'आवाज़' : 'Audio')}
+              {autoSpeak ? ((isMarathi || isHindi) ? 'आवाज़ चालू' : 'Audio On') : ((isMarathi || isHindi) ? 'आवाज़' : 'Audio')}
             </span>
           </button>
 
@@ -955,7 +955,7 @@ export const ChatPage: React.FC = () => {
             title="Box Breathing Exercise"
           >
             <Wind className="w-4 h-4 text-teal-700" />
-            <span className="hidden md:inline text-[11px]">{isHindi ? 'श्वास' : 'Breathe'}</span>
+            <span className="hidden md:inline text-[11px]">{(isMarathi || isHindi) ? 'श्वास' : 'Breathe'}</span>
           </button>
 
           {/* Quick Relief Lookup */}
@@ -965,7 +965,7 @@ export const ChatPage: React.FC = () => {
             title="SC/ST Statutory Relief Calculator"
           >
             <Scale className="w-4 h-4 text-amber-700" />
-            <span className="hidden md:inline text-[11px]">{isHindi ? 'मुआवजा' : 'Relief'}</span>
+            <span className="hidden md:inline text-[11px]">{(isMarathi || isHindi) ? 'मुआवजा' : 'Relief'}</span>
           </button>
 
           {/* Reset Chat */}
@@ -996,7 +996,7 @@ export const ChatPage: React.FC = () => {
           <div className="flex items-center gap-1.5">
             <Info className="w-3.5 h-3.5 text-amber-700 shrink-0" />
             <span>
-              {isHindi
+              {(isMarathi || isHindi)
                 ? 'सहाय मित्र एक AI साथी है। यह कानूनी या आपातकालीन पुलिस का विकल्प नहीं है।'
                 : 'Sahay Mitra is an AI companion for emotional first aid and rights navigation.'}
             </span>
@@ -1005,7 +1005,7 @@ export const ChatPage: React.FC = () => {
             href="tel:14566"
             className="font-bold text-amber-950 underline hover:text-amber-800 shrink-0"
           >
-            {isHindi ? 'संकट में 14566 मिलाएं' : 'Crisis? Dial 14566'}
+            {(isMarathi || isHindi) ? 'संकट में 14566 मिलाएं' : 'Crisis? Dial 14566'}
           </a>
         </div>
       )}
@@ -1033,7 +1033,7 @@ export const ChatPage: React.FC = () => {
 
       {/* Quick Prompts Carousel */}
       <div className="px-3 py-2 border-t border-stone-100 bg-stone-50/50 flex gap-1.5 overflow-x-auto no-scrollbar shrink-0">
-        {(isHindi ? QUICK_PROMPTS_HI : QUICK_PROMPTS_EN).map((promptText) => (
+        {((isMarathi || isHindi) ? QUICK_PROMPTS_HI : QUICK_PROMPTS_EN).map((promptText) => (
           <button
             key={promptText}
             onClick={() => sendMessage(promptText)}
@@ -1055,7 +1055,7 @@ export const ChatPage: React.FC = () => {
               onKeyDown={handleKeyDown}
               rows={1}
               placeholder={
-                isHindi
+                (isMarathi || isHindi)
                   ? 'अपनी बात या चिंता यहाँ लिखें… (Enter से भेजें)'
                   : 'Type your thoughts, fears, or questions here… (Enter to send)'
               }
@@ -1101,7 +1101,7 @@ export const ChatPage: React.FC = () => {
         <div className="mt-2 pt-2 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
           <div className="flex items-center gap-1.5 text-stone-600">
             <Lock className="w-3 h-3 text-emerald-600" />
-            <span>{isHindi ? '100% गोपनीय एवं एन्क्रिप्टेड' : 'Encrypted & Confidential'}</span>
+            <span>{(isMarathi || isHindi) ? '100% गोपनीय एवं एन्क्रिप्टेड' : 'Encrypted & Confidential'}</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -1238,7 +1238,7 @@ const TypingIndicator: React.FC<{ isHindi: boolean }> = ({ isHindi }) => (
           ))}
         </div>
         <span className="text-xs text-stone-500">
-          {isHindi ? 'सहाय मित्र विचार कर रहे हैं…' : 'Sahay Mitra is reflecting…'}
+          {(isMarathi || isHindi) ? 'सहाय मित्र विचार कर रहे हैं…' : 'Sahay Mitra is reflecting…'}
         </span>
       </div>
     </div>
@@ -1310,7 +1310,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
       <div className="flex items-center gap-2 mb-3">
         <Sparkles className="w-4 h-4 text-teal-800" />
         <h3 className="font-serif font-bold text-sm text-teal-950">
-          {isHindi ? '5-4-3-2-1 संवेदी ग्राउंडिंग अभ्यास' : '5-4-3-2-1 Sensory Grounding Tool'}
+          {(isMarathi || isHindi) ? '5-4-3-2-1 संवेदी ग्राउंडिंग अभ्यास' : '5-4-3-2-1 Sensory Grounding Tool'}
         </h3>
         <span className="text-[11px] px-2 py-0.5 bg-teal-100 text-teal-900 rounded-full font-medium ml-auto mr-6">
           Step {step + 1} / 5
@@ -1324,7 +1324,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
           </div>
           <div>
             <h4 className="font-bold text-xs sm:text-sm text-stone-900">
-              {isHindi ? current.titleHi : current.title}
+              {(isMarathi || isHindi) ? current.titleHi : current.title}
             </h4>
             <span className="text-[10px] text-stone-400">
               {current.count} sensory anchor points
@@ -1333,7 +1333,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
         </div>
 
         <p className="text-xs text-stone-600 leading-relaxed pt-1">
-          {isHindi ? current.descHi : current.desc}
+          {(isMarathi || isHindi) ? current.descHi : current.desc}
         </p>
       </div>
 
@@ -1343,7 +1343,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
           disabled={step === 0}
           className="px-3 py-1 rounded-lg text-xs font-semibold bg-white border border-stone-200 disabled:opacity-40"
         >
-          {isHindi ? 'पिछला' : 'Previous'}
+          {(isMarathi || isHindi) ? 'पिछला' : 'Previous'}
         </button>
 
         {step < steps.length - 1 ? (
@@ -1351,7 +1351,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
             onClick={() => setStep((s) => s + 1)}
             className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-teal-800 hover:bg-teal-700 text-white transition shadow-2xs"
           >
-            {isHindi ? 'अगला कदम →' : 'Next Step →'}
+            {(isMarathi || isHindi) ? 'अगला कदम →' : 'Next Step →'}
           </button>
         ) : (
           <button
@@ -1359,7 +1359,7 @@ const GroundingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
             className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white transition shadow-2xs flex items-center gap-1"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>{isHindi ? 'पूरा हुआ (धन्यवाद)' : 'Complete (I feel calmer)'}</span>
+            <span>{(isMarathi || isHindi) ? 'पूरा हुआ (धन्यवाद)' : 'Complete (I feel calmer)'}</span>
           </button>
         )}
       </div>
@@ -1456,7 +1456,7 @@ const BreathingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
       <div className="flex items-center gap-2 mb-3">
         <Wind className="w-4 h-4 text-teal-400" />
         <h3 className="font-serif font-bold text-sm text-slate-100">
-          {isHindi ? '4-2-6 शामक श्वास व्यायाम' : '4-2-6 Trauma Calming Breath'}
+          {(isMarathi || isHindi) ? '4-2-6 शामक श्वास व्यायाम' : '4-2-6 Trauma Calming Breath'}
         </h3>
         {running && (
           <span className="text-[11px] text-teal-300 ml-auto mr-6">
@@ -1477,14 +1477,14 @@ const BreathingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
 
         <div className="space-y-1">
           <p className="text-base sm:text-lg font-bold text-white font-serif">
-            {running ? (isHindi ? cur.nameHi : cur.name) : isHindi ? 'शुरू करने के लिए क्लिक करें' : 'Ready to begin'}
+            {running ? ((isMarathi || isHindi) ? cur.nameHi : cur.name) : (isMarathi || isHindi) ? 'शुरू करने के लिए क्लिक करें' : 'Ready to begin'}
           </p>
           <p className="text-xs text-slate-300">
             {running
-              ? isHindi
+              ? (isMarathi || isHindi)
                 ? 'शांत और लयबद्ध गति से पालन करें'
                 : 'Follow the gentle rhythm to ease racing heartbeat'
-              : isHindi
+              : (isMarathi || isHindi)
               ? '4 चक्र, धीमी और गहरी सांसें'
               : '4 soothing cycles of trauma-informed breath'}
           </p>
@@ -1501,7 +1501,7 @@ const BreathingModal: React.FC<{ isHindi: boolean; onClose: () => void }> = ({
               : 'bg-teal-500 hover:bg-teal-400 text-slate-950'
           )}
         >
-          {running ? (isHindi ? 'रोकें' : 'Stop') : isHindi ? 'शुरू करें' : 'Start Calming Breath'}
+          {running ? ((isMarathi || isHindi) ? 'रोकें' : 'Stop') : (isMarathi || isHindi) ? 'शुरू करें' : 'Start Calming Breath'}
         </button>
       </div>
     </div>
@@ -1529,7 +1529,7 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
       <div className="flex items-center gap-2 mb-3">
         <Scale className="w-4 h-4 text-amber-800" />
         <h3 className="font-serif font-bold text-sm text-stone-900">
-          {isHindi
+          {(isMarathi || isHindi)
             ? 'SC/ST अधिनियम वैधानिक मुआवजा कैलकुलेटर (नियम 12)'
             : 'SC/ST Act Statutory Relief Calculator (Rule 12)'}
         </h3>
@@ -1538,7 +1538,7 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
       {/* Select Category */}
       <div className="space-y-1 mb-3">
         <label className="text-[11px] font-semibold text-stone-600">
-          {isHindi ? 'अत्याचार / घटना की श्रेणी चुनें:' : 'Select Atrocity / Offence Category:'}
+          {(isMarathi || isHindi) ? 'अत्याचार / घटना की श्रेणी चुनें:' : 'Select Atrocity / Offence Category:'}
         </label>
         <select
           value={selectedIdx}
@@ -1547,7 +1547,7 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
         >
           {RELIEF_SCALES.map((item, idx) => (
             <option key={idx} value={idx}>
-              {isHindi ? item.categoryHi : item.category}
+              {(isMarathi || isHindi) ? item.categoryHi : item.category}
             </option>
           ))}
         </select>
@@ -1557,7 +1557,7 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
       <div className="bg-white rounded-xl p-3.5 border border-amber-200 shadow-2xs space-y-2">
         <div className="flex items-center justify-between">
           <span className="text-xs text-stone-500 font-medium">
-            {isHindi ? 'वैधानिक राहत राशि' : 'Mandated Relief Scale'}
+            {(isMarathi || isHindi) ? 'वैधानिक राहत राशि' : 'Mandated Relief Scale'}
           </span>
           <span className="text-base font-bold text-emerald-800 font-mono">
             {selected.amount}
@@ -1566,14 +1566,14 @@ const ReliefCalculatorModal: React.FC<{ isHindi: boolean; onClose: () => void }>
 
         <div className="pt-2 border-t border-stone-100 space-y-1">
           <p className="text-[11px] font-semibold text-stone-800">
-            {isHindi ? 'भुगतान प्रक्रिया (नियम 12(4)):' : 'Mandatory Disbursement Timeline:'}
+            {(isMarathi || isHindi) ? 'भुगतान प्रक्रिया (नियम 12(4)):' : 'Mandatory Disbursement Timeline:'}
           </p>
           <p className="text-xs text-stone-600 leading-relaxed">{selected.schedule}</p>
         </div>
       </div>
 
       <p className="text-[10px] text-stone-500 mt-2">
-        {isHindi
+        {(isMarathi || isHindi)
           ? '* यह राशि पीड़ित का कानूनी अधिकार है। जिला प्रशासन 7 दिनों में प्रथम किश्त देने के लिए बाध्य है।'
           : '* Guaranteed under the SC/ST (PoA) Amendment Rules, 2016. DM must release initial tranche within 7 days.'}
       </p>

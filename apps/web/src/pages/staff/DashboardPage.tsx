@@ -24,7 +24,7 @@ import {
 export const DashboardPage: React.FC = () => {
   const { cases } = useCases();
   const { alerts, acknowledgeAlert, escalateAlert, resolveAlert } = useAlerts();
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   const criticalAlerts = alerts.filter(
     (a) => (a.severity === 'critical' || a.severity === 'high') && a.status !== 'resolved'
@@ -37,9 +37,9 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <PageHeader
-        title={isHindi ? 'जिला कल्याण एवं संकट निगरानी कंसोल' : 'District Welfare & Distress Monitoring Console'}
+        title={(isMarathi || isHindi) ? 'जिला कल्याण एवं संकट निगरानी कंसोल' : 'District Welfare & Distress Monitoring Console'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'लखनऊ जिला • सामाजिक न्याय एवं अधिकारिता विभाग • एसओपी नियम 12 के अंतर्गत सक्रिय'
             : 'Operational District Console • Lucknow & Surrounding Blocks • Real-time Monitoring under Rule 12 SC/ST PoA Rules'
         }

@@ -30,7 +30,7 @@ import {
 export const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
   const setDemoRole = useAuthStore((s) => s.setDemoRole);
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   const handleRoleNavigate = (role: any, path: string) => {
     setDemoRole(role);
@@ -185,7 +185,7 @@ export const WelcomePage: React.FC = () => {
           <div className="flex items-center gap-2.5 border-b-2 border-[#0B3B60] pb-2">
             <div className="w-1.5 h-6 bg-[#F58220] rounded-sm" />
             <h2 className="text-base sm:text-lg font-black font-serif text-[#0B3B60] uppercase tracking-tight">
-              {isHindi ? 'डेमो रोल पोर्टल — Evaluator Navigation' : 'Demo Role Portals — Select Any Role to Evaluate'}
+              {(isMarathi || isHindi) ? 'डेमो रोल पोर्टल — Evaluator Navigation' : 'Demo Role Portals — Select Any Role to Evaluate'}
             </h2>
           </div>
           <p className="text-xs text-stone-600">
@@ -210,10 +210,10 @@ export const WelcomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-base font-black font-serif text-stone-900 leading-tight">
-                      {isHindi ? r.titleHi : r.title}
+                      {(isMarathi || isHindi) ? r.titleHi : r.title}
                     </h3>
                     <p className="text-xs text-stone-600 leading-relaxed mt-1.5">
-                      {isHindi ? r.descHi : r.description}
+                      {(isMarathi || isHindi) ? r.descHi : r.description}
                     </p>
                   </div>
                   <ul className="space-y-1 text-[11px] text-stone-700">
@@ -229,7 +229,7 @@ export const WelcomePage: React.FC = () => {
                   onClick={() => handleRoleNavigate(r.role, r.path)}
                   className={`w-full py-2.5 px-4 rounded-xl ${r.btn} text-white font-bold text-sm shadow-xs transition flex items-center justify-center gap-2 cursor-pointer`}
                 >
-                  <span>Enter {isHindi ? r.titleHi : r.title}</span>
+                  <span>Enter {(isMarathi || isHindi) ? r.titleHi : r.title}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

@@ -6,7 +6,7 @@ import { Settings, Shield, Bell, RotateCcw, CheckCircle2 } from 'lucide-react';
 
 export const SettingsPage: React.FC = () => {
   const { resetToDefault } = useCases();
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
   const [resetDone, setResetDone] = useState(false);
 
   const [threshold, setThreshold] = useState(70);
@@ -22,9 +22,9 @@ export const SettingsPage: React.FC = () => {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       <PageHeader
-        title={isHindi ? 'प्रणाली सेटिंग्स एवं एसओपी मानक' : 'System Configuration & SOP Protocols'}
+        title={(isMarathi || isHindi) ? 'प्रणाली सेटिंग्स एवं एसओपी मानक' : 'System Configuration & SOP Protocols'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'निगरानी सीमाएं, स्वचालित अलर्ट नियम एवं डेमो डेटा प्रबंधन'
             : 'Operational thresholds for algorithmic distress triggers, SLA escalations, and demonstration resets.'
         }

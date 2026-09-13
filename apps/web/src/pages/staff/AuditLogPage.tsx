@@ -6,14 +6,14 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { ShieldCheck, Lock, User, Clock, FileText, CheckCircle2 } from 'lucide-react';
 
 export const AuditLogPage: React.FC = () => {
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
       <PageHeader
-        title={isHindi ? 'सुरक्षित डेटा एक्सेस एवं ऑडिट ट्रेल' : 'Confidential Data Access & Audit Trail'}
+        title={(isMarathi || isHindi) ? 'सुरक्षित डेटा एक्सेस एवं ऑडिट ट्रेल' : 'Confidential Data Access & Audit Trail'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'अधिकारियों द्वारा मामले के अवलोकन, स्थिति परिवर्तन एवं आदेशों का अपरिवर्तनीय रिकॉर्ड'
             : 'Immutable, cryptographically verified record of every case access, officer action, status update, and statutory report export.'
         }

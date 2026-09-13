@@ -8,7 +8,7 @@ import { HeartHandshake, Filter, Plus, Check } from 'lucide-react';
 
 export const InterventionsPage: React.FC = () => {
   const { interventions, updateInterventionStatus, approveIntervention } = useInterventions();
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   const [selectedType, setSelectedType] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -26,9 +26,9 @@ export const InterventionsPage: React.FC = () => {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       <PageHeader
-        title={isHindi ? 'हस्तक्षेप, सुरक्षा एवं राहत प्रबंधन' : 'Interventions, Protection & Relief Management'}
+        title={(isMarathi || isHindi) ? 'हस्तक्षेप, सुरक्षा एवं राहत प्रबंधन' : 'Interventions, Protection & Relief Management'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'गवाह सुरक्षा, परामर्श, निःशुल्क कानूनी सहायता एवं वैधानिक राहत आदेश'
             : 'Track witness protection orders, clinical counselling deployments, safe housing, and statutory relief disbursements.'
         }

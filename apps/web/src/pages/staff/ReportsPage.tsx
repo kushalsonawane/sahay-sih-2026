@@ -6,7 +6,7 @@ import { Download, FileText, CheckCircle2, Calendar, FileSpreadsheet, Eye } from
 
 export const ReportsPage: React.FC = () => {
   const { cases } = useCases();
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
   const [downloadSuccess, setDownloadSuccess] = useState<string | null>(null);
 
   const reports = [
@@ -87,9 +87,9 @@ export const ReportsPage: React.FC = () => {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       <PageHeader
-        title={isHindi ? 'वैधानिक अनुपालन एवं रिपोर्ट जनरेटर' : 'Statutory Compliance & Reports Generator'}
+        title={(isMarathi || isHindi) ? 'वैधानिक अनुपालन एवं रिपोर्ट जनरेटर' : 'Statutory Compliance & Reports Generator'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'सामाजिक न्याय और अधिकारिता मंत्रालय एवं विशेष अदालतों के लिए आधिकारिक रिपोर्ट'
             : 'Generate verifiable statutory returns, relief audit registers, and protection summaries for MoSJE review committees and Special Courts.'
         }

@@ -19,7 +19,7 @@ import {
 import type { CheckInResponse } from '@sahay/shared';
 
 export const CheckInFlow: React.FC = () => {
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi } = useLanguage();
   const navigate = useNavigate();
   const { submitCheckIn } = useCheckIns();
   const { addAlert } = useAlerts();
@@ -42,11 +42,11 @@ export const CheckInFlow: React.FC = () => {
   const [additionalNotes, setAdditionalNotes] = useState('');
 
   const feelingLabels: Record<number, string> = {
-    5: isHindi ? 'शांत एवं सुरक्षित (Calm & Safe)' : 'Calm & Secure',
-    4: isHindi ? 'सामान्य (Managing Well)' : 'Managing Reasonably Well',
-    3: isHindi ? 'थोड़ा असहज / चिंतित (Somewhat Uneasy)' : 'Somewhat Uneasy / Stressed',
-    2: isHindi ? 'काफी परेशान (Very Distressed)' : 'Very Distressed / Anxious',
-    1: isHindi ? 'अत्यधिक संकट / भयभीत (Overwhelmed / Fearful)' : 'Severely Overwhelmed / Fearful',
+    5: (isMarathi || isHindi) ? 'शांत एवं सुरक्षित (Calm & Safe)' : 'Calm & Secure',
+    4: (isMarathi || isHindi) ? 'सामान्य (Managing Well)' : 'Managing Reasonably Well',
+    3: (isMarathi || isHindi) ? 'थोड़ा असहज / चिंतित (Somewhat Uneasy)' : 'Somewhat Uneasy / Stressed',
+    2: (isMarathi || isHindi) ? 'काफी परेशान (Very Distressed)' : 'Very Distressed / Anxious',
+    1: (isMarathi || isHindi) ? 'अत्यधिक संकट / भयभीत (Overwhelmed / Fearful)' : 'Severely Overwhelmed / Fearful',
   };
 
   const handleSupportToggle = (item: string) => {
@@ -113,10 +113,10 @@ export const CheckInFlow: React.FC = () => {
 
         <div className="space-y-2">
           <h2 className="text-2xl font-bold font-serif text-stone-900">
-            {isHindi ? 'आपका चेक-इन सुरक्षित दर्ज कर लिया गया है' : 'Thank You. Your Check-In Is Recorded.'}
+            {(isMarathi || isHindi) ? 'आपका चेक-इन सुरक्षित दर्ज कर लिया गया है' : 'Thank You. Your Check-In Is Recorded.'}
           </h2>
           <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-md mx-auto">
-            {isHindi
+            {(isMarathi || isHindi)
               ? 'आपकी जानकारी आपके नियुक्त अधिकारी और काउंसलर तक सुरक्षित पहुंचा दी गई है।'
               : 'Your responses have been confidentially logged and shared with your assigned welfare officer and counsellor.'}
           </p>
@@ -172,7 +172,7 @@ export const CheckInFlow: React.FC = () => {
       <div className="space-y-2">
         <div className="flex items-center justify-between text-xs text-stone-500 font-medium">
           <span>
-            {isHindi ? `चरण ${step} / 6` : `Step ${step} of 6`}
+            {(isMarathi || isHindi) ? `चरण ${step} / 6` : `Step ${step} of 6`}
           </span>
           <span>{Math.round((step / 6) * 100)}% Complete</span>
         </div>
@@ -194,7 +194,7 @@ export const CheckInFlow: React.FC = () => {
                 Emotional State
               </span>
               <h2 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi ? 'आज आप कुल मिलाकर कैसा महसूस कर रहे हैं?' : 'How are you feeling overall today?'}
+                {(isMarathi || isHindi) ? 'आज आप कुल मिलाकर कैसा महसूस कर रहे हैं?' : 'How are you feeling overall today?'}
               </h2>
               <p className="text-xs text-stone-500">
                 Select the option that best reflects your emotional state over the past 24 hours.
@@ -231,7 +231,7 @@ export const CheckInFlow: React.FC = () => {
                 Personal Safety
               </span>
               <h2 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi
+                {(isMarathi || isHindi)
                   ? 'क्या आप वर्तमान में जहाँ रह रहे हैं, वहाँ सुरक्षित महसूस कर रहे हैं?'
                   : 'Do you feel physically safe where you are living right now?'}
               </h2>
@@ -282,7 +282,7 @@ export const CheckInFlow: React.FC = () => {
                 Witness Protection & Threats
               </span>
               <h2 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi
+                {(isMarathi || isHindi)
                   ? 'क्या हाल ही में आपको किसी ने धमकाया, दबाव डाला या अनुचित संपर्क किया है?'
                   : 'Have you faced any threats, pressure, or intimidation recently?'}
               </h2>
@@ -333,7 +333,7 @@ export const CheckInFlow: React.FC = () => {
                 Physical Well-Being
               </span>
               <h2 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi
+                {(isMarathi || isHindi)
                   ? 'पिछले कुछ दिनों में आपकी नींद कैसी रही है?'
                   : 'How has your sleep and rest been over the past few nights?'}
               </h2>
@@ -376,7 +376,7 @@ export const CheckInFlow: React.FC = () => {
                 Daily Routine & Appetite
               </span>
               <h2 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi
+                {(isMarathi || isHindi)
                   ? 'क्या आप नियमित भोजन और दिनचर्या बनाए रख पा रहे हैं?'
                   : 'Have you been able to eat regular meals and manage daily tasks?'}
               </h2>
@@ -419,7 +419,7 @@ export const CheckInFlow: React.FC = () => {
                 Immediate Assistance
               </span>
               <h2 className="text-xl font-bold font-serif text-stone-900">
-                {isHindi
+                {(isMarathi || isHindi)
                   ? 'वर्तमान में आपको किस प्रकार की सहायता की आवश्यकता है?'
                   : 'What kind of support would help you most right now?'}
               </h2>

@@ -4,14 +4,14 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { Shield, Lock, Eye, CheckCircle2, UserCheck, AlertCircle } from 'lucide-react';
 
 export const PrivacyPage: React.FC = () => {
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2">
       <PageHeader
-        title={isHindi ? 'गोपनीयता, सहमति एवं डेटा सुरक्षा' : 'Privacy, Consent & Data Governance'}
+        title={(isMarathi || isHindi) ? 'गोपनीयता, सहमति एवं डेटा सुरक्षा' : 'Privacy, Consent & Data Governance'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'आपकी व्यक्तिगत पहचान और निगरानी डेटा की सुरक्षा की गारंटी'
             : 'How SAHAY protects citizen privacy, enforces pseudonymity, and guarantees voluntary participation under legal safeguards.'
         }

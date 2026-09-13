@@ -6,14 +6,14 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { CalendarCheck, Clock, User, Shield, CheckCircle2 } from 'lucide-react';
 
 export const AppointmentsPage: React.FC = () => {
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2">
       <PageHeader
-        title={isHindi ? 'काउंसलर एवं कानूनी सत्र' : 'Counsellor & Legal Consultations'}
+        title={(isMarathi || isHindi) ? 'काउंसलर एवं कानूनी सत्र' : 'Counsellor & Legal Consultations'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'आपके आगामी और पिछले सत्रों की सूची'
             : 'Track upcoming trauma support appointments, pre-trial legal briefings, and counsellor sessions.'
         }

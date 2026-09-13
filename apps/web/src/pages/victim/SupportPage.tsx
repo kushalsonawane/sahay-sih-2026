@@ -12,33 +12,33 @@ import {
 } from 'lucide-react';
 
 export const SupportPage: React.FC = () => {
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   const rights = [
     {
-      title: isHindi ? 'वैधानिक राहत एवं मुआवजा (Annexure I)' : 'Statutory Financial Relief & Compensation',
-      desc: isHindi
+      title: (isMarathi || isHindi) ? 'वैधानिक राहत एवं मुआवजा (Annexure I)' : 'Statutory Financial Relief & Compensation',
+      desc: (isMarathi || isHindi)
         ? 'नियम 12(4) के अनुसार, प्राथमिकी (FIR) दर्ज होने के 7 दिनों के भीतर 25% राहत राशि और आरोप पत्र (Charge-sheet) दाखिल होने पर अगली किश्त सीधे बैंक खाते में मिलना वैधानिक अधिकार है।'
         : 'Under Rule 12(4) of the SC/ST PoA Rules, 25% of statutory relief must be released within 7 days of FIR registration, with balance released at charge-sheet and conviction stages via direct bank transfer.',
       amount: '₹1,00,000 to ₹8,25,000 (Based on offence schedule)',
     },
     {
-      title: isHindi ? 'गवाह एवं पीड़ित सुरक्षा (Section 15A)' : 'Witness Protection Scheme (Section 15A)',
-      desc: isHindi
+      title: (isMarathi || isHindi) ? 'गवाह एवं पीड़ित सुरक्षा (Section 15A)' : 'Witness Protection Scheme (Section 15A)',
+      desc: (isMarathi || isHindi)
         ? 'अधिनियम की धारा 15A के अंतर्गत, किसी भी धमकी या अनुचित दबाव की स्थिति में पुलिस सुरक्षा, सुरक्षित आवास, और अदालत जाने के लिए सुरक्षित वाहन प्राप्त करने का पूर्ण कानूनी अधिकार है।'
         : 'Section 15A mandates state protection against intimidation, including armed police escort, installation of CCTV/security at residence, and emergency safe-house relocation.',
       amount: 'Full State Coverage (No Fee)',
     },
     {
-      title: isHindi ? 'निःशुल्क कानूनी सहायता (DLSA)' : 'Free Empanelled Legal Aid (DLSA)',
-      desc: isHindi
+      title: (isMarathi || isHindi) ? 'निःशुल्क कानूनी सहायता (DLSA)' : 'Free Empanelled Legal Aid (DLSA)',
+      desc: (isMarathi || isHindi)
         ? 'जिला विधिक सेवा प्राधिकरण (DLSA) द्वारा विशेष न्यायालय में आपकी पैरवी के लिए अनुभवी वरिष्ठ अधिवक्ता निःशुल्क उपलब्ध कराया जाता है।'
         : 'Free senior legal representation via the District Legal Services Authority (DLSA) with dedicated briefing sessions before trial proceedings.',
       amount: '100% Free of Cost',
     },
     {
-      title: isHindi ? 'यात्रा एवं दैनिक भत्ता (TA/DA)' : 'Travel & Daily Maintenance Allowance',
-      desc: isHindi
+      title: (isMarathi || isHindi) ? 'यात्रा एवं दैनिक भत्ता (TA/DA)' : 'Travel & Daily Maintenance Allowance',
+      desc: (isMarathi || isHindi)
         ? 'जांच अधिकारी या विशेष न्यायालय के समक्ष उपस्थित होने पर पीड़ित और उसके सहायक को यात्रा व्यय और दैनिक भत्ते का तत्काल भुगतान।'
         : 'Immediate reimbursement of travel expenses and daily maintenance allowance for victim and accompanying escort during investigations and trial hearings.',
       amount: 'Disbursed by Special Court / DWO',
@@ -48,9 +48,9 @@ export const SupportPage: React.FC = () => {
   return (
     <div className="space-y-6 max-w-4xl mx-auto py-2">
       <PageHeader
-        title={isHindi ? 'कानूनी अधिकार एवं सहायता निर्देशिका' : 'Statutory Rights & Support Directory'}
+        title={(isMarathi || isHindi) ? 'कानूनी अधिकार एवं सहायता निर्देशिका' : 'Statutory Rights & Support Directory'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'अनुसूचित जाति एवं अनुसूचित जनजाति (अत्याचार निवारण) अधिनियम के अंतर्गत आपके अधिकार'
             : 'Entitlements, protection mechanisms, and support channels guaranteed under the SC/ST (Prevention of Atrocities) Act & Rules.'
         }

@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 
 export const GovernmentHeader: React.FC = () => {
-  const { isHindi, language, toggleLanguage } = useLanguage();
+  const { isHindi, isMarathi, language, toggleLanguage } = useLanguage();
   const { largeText, toggleLargeText } = useAccessibilityStore();
   const setDemoRole = useAuthStore((s) => s.setDemoRole);
   const navigate = useNavigate();
@@ -62,11 +62,11 @@ export const GovernmentHeader: React.FC = () => {
               <div className="h-1/3 bg-[#138808]" />
             </div>
             <span className="font-semibold text-slate-100 text-[11px] tracking-wide">
-              {isHindi ? 'भारत सरकार' : 'GOVERNMENT OF INDIA'}
+              {(isMarathi || isHindi) ? 'भारत सरकार' : 'GOVERNMENT OF INDIA'}
             </span>
             <span className="text-slate-500">|</span>
             <span className="text-slate-300 text-[11px] hidden md:inline">
-              {isHindi
+              {(isMarathi || isHindi)
                 ? 'सामाजिक न्याय और अधिकारिता मंत्रालय'
                 : 'Ministry of Social Justice and Empowerment'}
             </span>
@@ -79,7 +79,7 @@ export const GovernmentHeader: React.FC = () => {
               href="#main-content"
               className="text-slate-300 hover:text-amber-300 underline hidden lg:inline"
             >
-              {isHindi ? 'मुख्य सामग्री पर जाएं' : 'Skip to main content'}
+              {(isMarathi || isHindi) ? 'मुख्य सामग्री पर जाएं' : 'Skip to main content'}
             </a>
 
             <span className="text-slate-600 hidden lg:inline">|</span>
@@ -190,7 +190,7 @@ export const GovernmentHeader: React.FC = () => {
                   : 'border-transparent text-white'
               }`}
             >
-              <span>{isHindi ? 'मुख्य पृष्ठ' : 'Home'}</span>
+              <span>{(isMarathi || isHindi) ? 'मुख्य पृष्ठ' : 'Home'}</span>
             </Link>
 
             <button
@@ -202,7 +202,7 @@ export const GovernmentHeader: React.FC = () => {
               }`}
             >
               <Heart className="w-3.5 h-3.5 text-teal-300" />
-              <span>{isHindi ? 'नागरिक सुरक्षित पोर्टल' : 'Citizen Safe Portal'}</span>
+              <span>{(isMarathi || isHindi) ? 'नागरिक सुरक्षित पोर्टल' : 'Citizen Safe Portal'}</span>
             </button>
 
             <button
@@ -214,35 +214,35 @@ export const GovernmentHeader: React.FC = () => {
               }`}
             >
               <Scale className="w-3.5 h-3.5 text-amber-300" />
-              <span>{isHindi ? 'प्रशासनिक कंसोल (DM/SDM)' : 'Official Console (DM/SDM)'}</span>
+              <span>{(isMarathi || isHindi) ? 'प्रशासनिक कंसोल (DM/SDM)' : 'Official Console (DM/SDM)'}</span>
             </button>
 
             <a
               href="#users"
               className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
             >
-              <span>{isHindi ? 'उपयोगकर्ता पोर्टल (#users)' : 'Stakeholder Portals (#users)'}</span>
+              <span>{(isMarathi || isHindi) ? 'उपयोगकर्ता पोर्टल (#users)' : 'Stakeholder Portals (#users)'}</span>
             </a>
 
             <a
               href="#schemes"
               className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
             >
-              <span>{isHindi ? 'प्रमुख योजनाएं' : 'Schemes & Relief'}</span>
+              <span>{(isMarathi || isHindi) ? 'प्रमुख योजनाएं' : 'Schemes & Relief'}</span>
             </a>
 
             <a
               href="#acts"
               className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
             >
-              <span>{isHindi ? 'अधिनियम एवं नियम' : 'PoA Acts & Rules'}</span>
+              <span>{(isMarathi || isHindi) ? 'अधिनियम एवं नियम' : 'PoA Acts & Rules'}</span>
             </a>
 
             <a
               href="#stats"
               className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
             >
-              <span>{isHindi ? 'सांख्यिकी' : 'Statistics'}</span>
+              <span>{(isMarathi || isHindi) ? 'सांख्यिकी' : 'Statistics'}</span>
             </a>
 
             <Link
@@ -250,7 +250,7 @@ export const GovernmentHeader: React.FC = () => {
               className="px-3.5 py-3 transition hover:bg-[#134975] text-amber-300 border-b-2 border-transparent flex items-center gap-1"
             >
               <Compass className="w-3.5 h-3.5 text-amber-400" />
-              <span>{isHindi ? 'SIH गाइड' : 'SIH Hub'}</span>
+              <span>{(isMarathi || isHindi) ? 'SIH गाइड' : 'SIH Hub'}</span>
             </Link>
           </div>
 
@@ -276,31 +276,31 @@ export const GovernmentHeader: React.FC = () => {
               }}
               className="w-full text-left py-2 px-3 rounded hover:bg-slate-800 text-white font-semibold block"
             >
-              {isHindi ? 'मुख्य पृष्ठ' : 'Home'}
+              {(isMarathi || isHindi) ? 'मुख्य पृष्ठ' : 'Home'}
             </button>
             <button
               onClick={() => handlePortalNavigate('victim', '/victim')}
               className="w-full text-left py-2 px-3 rounded bg-teal-900/60 text-teal-200 font-bold block"
             >
-              {isHindi ? 'नागरिक / पीड़ित सुरक्षित पोर्टल' : 'Citizen Safe Space Portal'}
+              {(isMarathi || isHindi) ? 'नागरिक / पीड़ित सुरक्षित पोर्टल' : 'Citizen Safe Space Portal'}
             </button>
             <button
               onClick={() => handlePortalNavigate('district_officer', '/dashboard')}
               className="w-full text-left py-2 px-3 rounded bg-amber-900/60 text-amber-200 font-bold block"
             >
-              {isHindi ? 'प्रशासनिक कंसोल (DM / SDM)' : 'Officer Console (DM / SDM)'}
+              {(isMarathi || isHindi) ? 'प्रशासनिक कंसोल (DM / SDM)' : 'Officer Console (DM / SDM)'}
             </button>
             <button
               onClick={() => handlePortalNavigate('counsellor', '/cases')}
               className="w-full text-left py-2 px-3 rounded hover:bg-slate-800 text-slate-200 block"
             >
-              {isHindi ? 'क्लिनिकल मनोवैज्ञानिक कंसोल' : 'Clinical Counsellor Console'}
+              {(isMarathi || isHindi) ? 'क्लिनिकल मनोवैज्ञानिक कंसोल' : 'Clinical Counsellor Console'}
             </button>
             <button
               onClick={() => handlePortalNavigate('state_admin', '/analytics')}
               className="w-full text-left py-2 px-3 rounded hover:bg-slate-800 text-slate-200 block"
             >
-              {isHindi ? 'राज्य / राष्ट्रीय प्रशासन' : 'State / National Analytics'}
+              {(isMarathi || isHindi) ? 'राज्य / राष्ट्रीय प्रशासन' : 'State / National Analytics'}
             </button>
             <div className="pt-2 border-t border-slate-700 flex items-center justify-between">
               <span className="text-amber-300 font-bold">Helpline: 14566</span>

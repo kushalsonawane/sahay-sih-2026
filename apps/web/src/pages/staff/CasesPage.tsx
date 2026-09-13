@@ -9,7 +9,7 @@ import { FolderGit2, Download, Plus, Shield } from 'lucide-react';
 
 export const CasesPage: React.FC = () => {
   const { cases } = useCases();
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRisk, setSelectedRisk] = useState('all');
@@ -60,9 +60,9 @@ export const CasesPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <PageHeader
-        title={isHindi ? 'निगरानी किए जा रहे मामले' : 'Monitored Atrocity Caseload'}
+        title={(isMarathi || isHindi) ? 'निगरानी किए जा रहे मामले' : 'Monitored Atrocity Caseload'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'अनुसूचित जाति एवं अनुसूचित जनजाति (अत्याचार निवारण) अधिनियम के अंतर्गत सक्रिय मामले'
             : 'All active cases across districts, tracked for distress indicators, witness protection needs, and statutory relief.'
         }

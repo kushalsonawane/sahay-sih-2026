@@ -8,14 +8,14 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { BarChart3, TrendingUp, Shield, Clock, FileCheck, Building } from 'lucide-react';
 
 export const AnalyticsPage: React.FC = () => {
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
       <PageHeader
-        title={isHindi ? 'राष्ट्रीय एवं राज्य स्तरीय सांख्यिकी' : 'District & State Level Analytics Console'}
+        title={(isMarathi || isHindi) ? 'राष्ट्रीय एवं राज्य स्तरीय सांख्यिकी' : 'District & State Level Analytics Console'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'अनुसूचित जाति एवं जनजाति कल्याण निगरानी सांख्यिकी एवं अंतर-जिला तुलना'
             : 'Cross-district performance metrics, distress index trends, and statutory compliance under the SC/ST PoA Act.'
         }

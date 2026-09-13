@@ -8,7 +8,7 @@ import { AlertTriangle, Filter, CheckCircle2 } from 'lucide-react';
 
 export const AlertsPage: React.FC = () => {
   const { alerts, acknowledgeAlert, escalateAlert, resolveAlert } = useAlerts();
-  const { isHindi } = useLanguage();
+  const { isHindi, isMarathi, isMarathi } = useLanguage();
 
   const [selectedSeverity, setSelectedSeverity] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -28,9 +28,9 @@ export const AlertsPage: React.FC = () => {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       <PageHeader
-        title={isHindi ? 'संकट एवं सुरक्षा अलर्ट कंसोल' : 'Distress & Protection Alert Console'}
+        title={(isMarathi || isHindi) ? 'संकट एवं सुरक्षा अलर्ट कंसोल' : 'Distress & Protection Alert Console'}
         subtitle={
-          isHindi
+          (isMarathi || isHindi)
             ? 'अधिनियम के अंतर्गत त्वरित प्रतिक्रिया हेतु सक्रिय अलर्ट'
             : 'Automated distress spikes, threat reports, and SLA countdowns requiring immediate administrative or clinical intervention.'
         }
