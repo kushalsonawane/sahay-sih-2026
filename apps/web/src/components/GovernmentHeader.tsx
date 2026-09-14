@@ -37,6 +37,19 @@ export const GovernmentHeader: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
+  const handleAnchorNavigate = (hash: string) => {
+    setMobileMenuOpen(false);
+    if (location.pathname === '/' || location.pathname === '/welcome') {
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        window.history.replaceState(null, '', `#${hash}`);
+        return;
+      }
+    }
+    navigate(`/#${hash}`);
+  };
+
   useEffect(() => {
     if (largeText) {
       document.documentElement.classList.add('text-mode-large');
@@ -210,33 +223,33 @@ export const GovernmentHeader: React.FC = () => {
               <span>{isMarathi ? 'प्रशासकीय कन्सोल (DM/SDM)' : isHindi ? 'प्रशासनिक कंसोल (DM/SDM)' : 'Official Console (DM/SDM)'}</span>
             </button>
 
-            <a
-              href="#users"
-              className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
+            <button
+              onClick={() => handleAnchorNavigate('users')}
+              className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent cursor-pointer"
             >
-              <span>{isMarathi ? 'वापरकर्ता पोर्टल (#users)' : isHindi ? 'उपयोगकर्ता पोर्टल (#users)' : 'Stakeholder Portals (#users)'}</span>
-            </a>
+              <span>{isMarathi ? 'हितधारक पोर्टल' : isHindi ? 'हितधारक पोर्टल' : 'Stakeholder Portals'}</span>
+            </button>
 
-            <a
-              href="#schemes"
-              className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
+            <button
+              onClick={() => handleAnchorNavigate('schemes')}
+              className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent cursor-pointer"
             >
               <span>{isMarathi ? 'प्रमुख योजना व मदत' : isHindi ? 'प्रमुख योजनाएं' : 'Schemes & Relief'}</span>
-            </a>
+            </button>
 
-            <a
-              href="#acts"
-              className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
+            <button
+              onClick={() => handleAnchorNavigate('acts')}
+              className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent cursor-pointer"
             >
               <span>{isMarathi ? 'कायदा आणि नियम' : isHindi ? 'अधिनियम एवं नियम' : 'PoA Acts & Rules'}</span>
-            </a>
+            </button>
 
-            <a
-              href="#stats"
-              className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent"
+            <button
+              onClick={() => handleAnchorNavigate('stats')}
+              className="px-3.5 py-3 transition hover:bg-[#134975] text-slate-100 border-b-2 border-transparent cursor-pointer"
             >
               <span>{isMarathi ? 'आकडेवारी' : isHindi ? 'सांख्यिकी' : 'Statistics'}</span>
-            </a>
+            </button>
 
             <Link
               to="/welcome"
@@ -295,6 +308,32 @@ export const GovernmentHeader: React.FC = () => {
             >
               {(isMarathi || isHindi) ? 'राज्य / राष्ट्रीय प्रशासन' : 'State / National Analytics'}
             </button>
+            <div className="border-t border-slate-700 pt-2 space-y-1">
+              <button
+                onClick={() => handleAnchorNavigate('users')}
+                className="w-full text-left py-1.5 px-3 rounded hover:bg-slate-800 text-slate-200 block"
+              >
+                {(isMarathi || isHindi) ? 'हितधारक पोर्टल (#users)' : 'Stakeholder Portals'}
+              </button>
+              <button
+                onClick={() => handleAnchorNavigate('schemes')}
+                className="w-full text-left py-1.5 px-3 rounded hover:bg-slate-800 text-slate-200 block"
+              >
+                {(isMarathi || isHindi) ? 'प्रमुख योजना व मदत (#schemes)' : 'Schemes & Relief'}
+              </button>
+              <button
+                onClick={() => handleAnchorNavigate('acts')}
+                className="w-full text-left py-1.5 px-3 rounded hover:bg-slate-800 text-slate-200 block"
+              >
+                {(isMarathi || isHindi) ? 'कायदा आणि नियम (#acts)' : 'PoA Acts & Rules'}
+              </button>
+              <button
+                onClick={() => handleAnchorNavigate('stats')}
+                className="w-full text-left py-1.5 px-3 rounded hover:bg-slate-800 text-slate-200 block"
+              >
+                {(isMarathi || isHindi) ? 'आकडेवारी (#stats)' : 'Statistics & Monitoring'}
+              </button>
+            </div>
             <div className="pt-2 border-t border-slate-700 flex items-center justify-between">
               <span className="text-amber-300 font-bold text-xs">Helpline: 14566</span>
               <LanguageSlider />
