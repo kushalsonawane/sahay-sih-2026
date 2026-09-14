@@ -121,12 +121,23 @@ const CRISIS_KEYWORDS_HI = [
   'फांसी',
   'जहर',
 ];
+const CRISIS_KEYWORDS_MR = [
+  'आत्महत्या',
+  'आयुष्य संपवणे',
+  'मरायचं',
+  'स्वतःला इजा',
+  'जगावेसे वाटत नाही',
+  'फाशी',
+  'विष',
+  'जीव देणे',
+];
 
 const detectCrisis = (t: string) => {
   const lower = t.toLowerCase();
   return (
     CRISIS_KEYWORDS_EN.some((k) => lower.includes(k)) ||
-    CRISIS_KEYWORDS_HI.some((k) => t.includes(k))
+    CRISIS_KEYWORDS_HI.some((k) => t.includes(k)) ||
+    CRISIS_KEYWORDS_MR.some((k) => t.includes(k))
   );
 };
 
@@ -134,15 +145,15 @@ const detectCrisis = (t: string) => {
 const intentPatterns: [Intent, RegExp][] = [
   [
     'threats_danger',
-    /threat|threaten|danger|unsafe|kill me|attack|village|sarpanch|goons|accused outside|stalking|followed|धमकी|खतरा|मारने|हमला|सुरक्षा नहीं|पीछा/i,
+    /threat|threaten|danger|unsafe|kill me|attack|village|sarpanch|goons|accused outside|stalking|followed|धमकी|खतरा|मारने|हमला|सुरक्षा नहीं|पीछा|धमकावणे|धोका|असुरक्षित|गुंड/i,
   ],
   [
     'anxiety_panic',
-    /anxious|anxiety|panic|heart racing|shivering|trembling|can't breathe|suffocating|terrified|scared|fear|घबराहट|डर|कांप|सांस फूल|दहशत/i,
+    /anxious|anxiety|panic|heart racing|shivering|trembling|can't breathe|suffocating|terrified|scared|fear|घबराहट|डर|कांप|सांस फूल|दहशत|भीती|घाबरलो|घाबरले|थरकाप/i,
   ],
   [
     'court_hearing',
-    /court|judge|hearing|witness|advocate|lawyer|cross examination|special court|section 15a|अदालत|कोर्ट|गवाह|पेशी|वकील|सुनवाई/i,
+    /court|judge|hearing|witness|advocate|lawyer|cross examination|special court|section 15a|अदालत|कोर्ट|गवाह|पेशी|वकील|सुनवाई|न्यायालय|साक्षीदार|तारीख/i,
   ],
   [
     'compensation_relief',
@@ -612,6 +623,17 @@ const QUICK_PROMPTS_HI = [
   'क्या यह बातचीत पूरी तरह गोपनीय है?',
 ];
 
+const QUICK_PROMPTS_MR = [
+  'मला सध्या खूप भीती वाटत आहे',
+  'मला कोणीतरी धमकी देत आहे',
+  'माझी उद्या न्यायालयात तारीख आहे, खूप घबराट वाटतेय',
+  'माझी वैधानिक आर्थिक मदत कधी मिळेल?',
+  'भीतीमुळे रात्री झोप येत नाही',
+  'मी समुपदेशक प्रिया शर्मा यांच्याशी बोलू शकेन का?',
+  'मला शांत होण्यासाठी मदत करा',
+  'हा संवाद पूर्णपणे गोपनीय आहे का?',
+];
+
 /* ─────────────────────── Main Component ─────────────────────────── */
 export const ChatPage: React.FC = () => {
   const { isHindi, isMarathi } = useLanguage();
@@ -885,8 +907,8 @@ export const ChatPage: React.FC = () => {
 
   return (
     <div
-      className="flex flex-col bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden"
-      style={{ height: 'calc(100vh - 145px)', minHeight: '560px' }}
+      className="flex flex-col bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex-1"
+      style={{ minHeight: '520px' }}
     >
       {/* Top Header */}
       <div className="p-3 sm:p-4 border-b border-stone-200 bg-stone-50/70 flex items-center justify-between gap-3">
@@ -901,14 +923,16 @@ export const ChatPage: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-bold text-stone-900 font-serif leading-tight">
-                {(isMarathi || isHindi) ? 'सहाय मित्र' : 'Sahay Mitra'}
+                {isMarathi ? 'सहाय मित्र' : isHindi ? 'सहाय मित्र' : 'Sahay Mitra'}
               </h1>
               <span className="text-[10px] font-semibold text-teal-800 bg-teal-50 border border-teal-200 px-1.5 py-0.5 rounded-full">
-                {(isMarathi || isHindi) ? '24/7 सक्रिय' : 'AI Companion'}
+                {isMarathi ? '२४/७ सक्रिय' : isHindi ? '24/7 सक्रिय' : 'AI Companion'}
               </span>
             </div>
             <p className="text-[11px] text-stone-500 leading-tight">
-              {(isMarathi || isHindi)
+              {isMarathi
+                ? 'गोपनीय मनोवैज्ञानिक प्राथमिक मदत आणि कायदेशीर हक्क मार्गदर्शक'
+                : isHindi
                 ? 'गोपनीय मनोवैज्ञानिक प्राथमिक उपचार एवं कानूनी अधिकार साथी'
                 : 'Confidential Psychological First-Aid & Statutory Rights Companion'}
             </p>
@@ -1036,7 +1060,7 @@ export const ChatPage: React.FC = () => {
 
       {/* Quick Prompts Carousel */}
       <div className="px-3 py-2 border-t border-stone-100 bg-stone-50/50 flex gap-1.5 overflow-x-auto no-scrollbar shrink-0">
-        {((isMarathi || isHindi) ? QUICK_PROMPTS_HI : QUICK_PROMPTS_EN).map((promptText) => (
+        {(isMarathi ? QUICK_PROMPTS_MR : isHindi ? QUICK_PROMPTS_HI : QUICK_PROMPTS_EN).map((promptText) => (
           <button
             key={promptText}
             onClick={() => sendMessage(promptText)}
@@ -1058,7 +1082,9 @@ export const ChatPage: React.FC = () => {
               onKeyDown={handleKeyDown}
               rows={1}
               placeholder={
-                (isMarathi || isHindi)
+                isMarathi
+                  ? 'तुमची बात किंवा काळजी येथे लिहा… (Enter दाबा)'
+                  : isHindi
                   ? 'अपनी बात या चिंता यहाँ लिखें… (Enter से भेजें)'
                   : 'Type your thoughts, fears, or questions here… (Enter to send)'
               }
@@ -1104,7 +1130,7 @@ export const ChatPage: React.FC = () => {
         <div className="mt-2 pt-2 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
           <div className="flex items-center gap-1.5 text-stone-600">
             <Lock className="w-3 h-3 text-emerald-600" />
-            <span>{(isMarathi || isHindi) ? '100% गोपनीय एवं एन्क्रिप्टेड' : 'Encrypted & Confidential'}</span>
+            <span>{isMarathi ? '१००% गोपनीय व एन्क्रिप्टेड' : isHindi ? '100% गोपनीय एवं एन्क्रिप्टेड' : 'Encrypted & Confidential'}</span>
           </div>
 
           <div className="flex items-center gap-3">

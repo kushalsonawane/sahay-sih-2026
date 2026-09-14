@@ -57,6 +57,9 @@ export const CitizenLayout: React.FC = () => {
     },
   ];
 
+  const location = useLocation();
+  const isChatRoute = location.pathname === '/victim/chat';
+
   return (
     <div
       className={cn(
@@ -132,7 +135,12 @@ export const CitizenLayout: React.FC = () => {
       </header>
 
       {/* Main content */}
-      <main className="flex-1 max-w-3xl mx-auto w-full px-4 py-6 pb-28">
+      <main
+        className={cn(
+          'flex-1 max-w-3xl mx-auto w-full px-3 sm:px-4 flex flex-col',
+          isChatRoute ? 'py-1.5 pb-[68px]' : 'py-6 pb-28'
+        )}
+      >
         <Outlet />
       </main>
 
