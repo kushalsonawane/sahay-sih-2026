@@ -183,11 +183,11 @@ export function generateCircularPdf(circular: OfficialCircular): void {
     doc.setFont('times', 'bold');
     doc.setFontSize(11);
     doc.setTextColor(11, 59, 96);
-    doc.text('भारत सरकार / GOVERNMENT OF INDIA', marginX + 16, 14);
+    doc.text('BHARAT SARKAR / GOVERNMENT OF INDIA', marginX + 16, 14);
 
     doc.setFontSize(9.5);
     doc.setTextColor(30, 41, 59);
-    doc.text('सामाजिक न्याय एवं अधिकारिता मंत्रालय', marginX + 16, 18.5);
+    doc.text('SAMĀJIK NYĀY EVAM ADHIKĀRITĀ MANTRĀLAYA', marginX + 16, 18.5);
     doc.setFont('times', 'normal');
     doc.text('MINISTRY OF SOCIAL JUSTICE AND EMPOWERMENT', marginX + 16, 22.5);
 
@@ -266,14 +266,13 @@ export function generateCircularPdf(circular: OfficialCircular): void {
   doc.text(splitSubject, marginX + 4, currentY + 5.5);
   currentY += subjectBoxHeight + 6;
 
-  // Hindi Title Reference
-  if (circular.titleHi) {
+  // Reference Division Box
+  if (circular.division) {
     doc.setFont('times', 'italic');
     doc.setFontSize(8);
     doc.setTextColor(100, 116, 139);
-    const hiLines = doc.splitTextToSize(`संदर्भ विषय: ${circular.titleHi}`, contentWidth);
-    doc.text(hiLines, marginX, currentY);
-    currentY += hiLines.length * 4 + 4;
+    doc.text(`Official Gazette Reference • Division: ${circular.division} • National Repository`, marginX, currentY);
+    currentY += 6;
   }
 
   // Statutory Citation Box
@@ -412,7 +411,22 @@ export function generateCircularPdf(circular: OfficialCircular): void {
   // Draw official header and footer on Page 1
   drawOfficialHeader(1, 1);
 
-  // Trigger browser download
+  // Trigger browser download with reliable Blob URL fallback
   const safeFilename = `${circular.ref.replace(/[^a-zA-Z0-9_-]/g, '_')}_Official_Notification.pdf`;
-  doc.save(safeFilename);
+  try {
+    const pdfBlob = doc.output('blob');
+    const blobUrl = URL.createObjectURL(pdfBlob);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = safeFilename;
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    }, 1000);
+  } catch (blobErr) {
+    console.warn('Blob download fallback, attempting direct doc.save:', blobErr);
+    doc.save(safeFilename);
+  }
 }

@@ -15,6 +15,7 @@ import {
 import { cn } from '../lib/cn';
 import { useAccessibilityStore } from '../store/authStore';
 import { AshokaEmblem } from '../components/NationalEmblem';
+import { LanguageSlider } from '../components/LanguageSlider';
 
 export const CitizenLayout: React.FC = () => {
   const { isHindi, isMarathi } = useLanguage();
@@ -108,6 +109,9 @@ export const CitizenLayout: React.FC = () => {
           </Link>
 
           <div className="flex items-center gap-2">
+            {/* Language Switcher with Marathi, Hindi, English */}
+            <LanguageSlider compact />
+
             <a
               href="tel:14566"
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold text-xs border border-teal-200 transition"

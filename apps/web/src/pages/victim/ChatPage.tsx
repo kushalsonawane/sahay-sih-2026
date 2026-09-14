@@ -670,7 +670,10 @@ export const ChatPage: React.FC = () => {
 
       // Select natural voice if available
       const voices = window.speechSynthesis.getVoices();
-      if (isHindi) {
+      if (isMarathi) {
+        const mrVoice = voices.find((v) => v.lang.includes('mr') || v.lang.includes('hi'));
+        if (mrVoice) utterance.voice = mrVoice;
+      } else if (isHindi) {
         const hiVoice = voices.find((v) => v.lang.includes('hi'));
         if (hiVoice) utterance.voice = hiVoice;
       } else {
@@ -847,7 +850,7 @@ export const ChatPage: React.FC = () => {
 
     try {
       const rec: ISpeechRecognition = new SR();
-      rec.lang = (isMarathi || isHindi) ? 'hi-IN' : 'en-IN';
+      rec.lang = isMarathi ? 'mr-IN' : isHindi ? 'hi-IN' : 'en-IN';
       rec.interimResults = false;
       rec.onresult = (e) => {
         const transcript = (e as ISREvent).results[0][0].transcript;
